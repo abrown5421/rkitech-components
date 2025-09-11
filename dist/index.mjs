@@ -26811,21 +26811,21 @@ var List2 = ({
 var List_default = List2;
 var ListItem = ({
   children,
-  iconName,
+  iconBullet,
   tailwindClasses = "",
   animationObject,
   onClick,
   style
 }) => {
   const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
-  if (iconName) {
+  if (iconBullet) {
     return /* @__PURE__ */ jsxs(
       "li",
       {
         className: `component-root list-none flex items-center ${tailwindClasses} ${animationClasses}`,
         style,
         children: [
-          /* @__PURE__ */ jsx("span", { className: "mr-2", children: /* @__PURE__ */ jsx(Icon_default, { iconName, size: 16 }) }),
+          /* @__PURE__ */ jsx("span", { className: "mr-2", children: iconBullet }),
           children
         ]
       }

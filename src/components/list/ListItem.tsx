@@ -20,12 +20,14 @@ const ListItem: React.FC<ListItemProps> = ({
   if (iconBullet) {
     return (
       <li
-        className={`component-root list-none flex items-center ${tailwindClasses} ${animationClasses}`}
-        style={style}
+        className={`component-root flex items-center ${tailwindClasses} ${animationClasses}`}
+        style={{
+            animationDelay: `${animationObject?.delay ?? 0}s`,
+            ...style,
+        }}
+        onClick={onClick}
       >
-        <span className="mr-2">
-          {iconBullet}
-        </span>
+        {iconBullet && <span className="mr-2 flex-shrink-0">{iconBullet}</span>}
         {children}
       </li>
     );
