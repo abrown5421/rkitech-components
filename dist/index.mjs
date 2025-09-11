@@ -26822,10 +26822,14 @@ var ListItem = ({
     return /* @__PURE__ */ jsxs(
       "li",
       {
-        className: `component-root list-none flex items-center ${tailwindClasses} ${animationClasses}`,
-        style,
+        className: `component-root flex items-center ${tailwindClasses} ${animationClasses}`,
+        style: {
+          animationDelay: `${animationObject?.delay ?? 0}s`,
+          ...style
+        },
+        onClick,
         children: [
-          /* @__PURE__ */ jsx("span", { className: "mr-2", children: iconBullet }),
+          iconBullet && /* @__PURE__ */ jsx("span", { className: "mr-2 flex-shrink-0", children: iconBullet }),
           children
         ]
       }
