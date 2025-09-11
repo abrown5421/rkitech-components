@@ -9,6 +9,7 @@ const Image: React.FC<ImageProps> = ({
   animationObject,
   tailwindClasses = "",
   onClick,
+  style,
   ...rest
 }) => {
   const animationClasses = animationObject
@@ -26,6 +27,8 @@ const Image: React.FC<ImageProps> = ({
       style={{
         width: width ? (typeof width === "number" ? `${width}px` : width) : undefined,
         height: height ? (typeof height === "number" ? `${height}px` : height) : undefined,
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
       }}
       {...rest}
     />

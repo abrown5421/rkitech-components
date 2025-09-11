@@ -7,7 +7,13 @@ const Text: React.FC<TextProps> = ({ text, tailwindClasses = '', animationObject
     : '';
 
   return (
-    <div className={`component-root ${tailwindClasses} ${animationClasses}`} style={style}>
+    <div 
+      className={`component-root ${tailwindClasses} ${animationClasses}`} 
+      style={{
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
+      }}
+    >
       {text}
     </div>
   );

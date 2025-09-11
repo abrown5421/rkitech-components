@@ -35,7 +35,10 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <li
       className={`component-root ${tailwindClasses} ${animationClasses}`}
-      style={style}
+      style={{
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
+      }}
       onClick={onClick}
     >
       {children}

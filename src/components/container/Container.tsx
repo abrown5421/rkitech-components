@@ -15,7 +15,10 @@ const Container: React.FC<ContainerProps> = ({
   return (
     <div
       className={`component-root flex ${tailwindClasses} ${animationClasses}`}
-      style={style}
+      style={{
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
+      }}
       onClick={onClick} 
     >
       {children}

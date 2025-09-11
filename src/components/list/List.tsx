@@ -37,7 +37,10 @@ const List: React.FC<ListProps> = ({
   return (
     <Wrapper
       className={`component-root ${baseClasses} ${tailwindClasses} ${animationClasses}`}
-      style={style}
+      style={{
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
+      }}
     >
       {children}
     </Wrapper>
