@@ -26702,7 +26702,8 @@ var Icon2 = ({
   tailwindClasses = "",
   animationObject,
   style,
-  color = "gray-950",
+  color = "gray",
+  intensity = 950,
   size = 24
 }) => {
   const IconComponent = lucide_react_exports[iconName];
@@ -26711,15 +26712,14 @@ var Icon2 = ({
     return null;
   }
   const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
-  const [baseColor, intensityStr] = color.split("-");
-  const intensity = parseInt(intensityStr || "500", 10);
-  const colorClass = `text-${baseColor}-${intensity}`;
+  const colorClass = color === "parent" ? "text-current" : `text-${color}-${intensity}`;
+  const hexColor = color === "parent" ? void 0 : tailwindToHex(color, intensity);
   return /* @__PURE__ */ jsx(
     "div",
     {
       className: `component-root ${tailwindClasses} ${animationClasses} ${colorClass}`,
       style,
-      children: /* @__PURE__ */ jsx(IconComponent, { size, stroke: tailwindToHex(baseColor, intensity) })
+      children: /* @__PURE__ */ jsx(IconComponent, { size, stroke: hexColor })
     }
   );
 };
