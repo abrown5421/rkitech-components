@@ -1,10 +1,9 @@
 import React from "react";
-import Icon from "../icon/Icon";
 import { ListItemProps } from "./listType";
 
 const ListItem: React.FC<ListItemProps> = ({
   children,
-  iconName,
+  iconBullet,
   tailwindClasses = "",
   animationObject,
   onClick,
@@ -18,14 +17,14 @@ const ListItem: React.FC<ListItemProps> = ({
       }`
     : "";
 
-  if (iconName) {
+  if (iconBullet) {
     return (
       <li
         className={`component-root list-none flex items-center ${tailwindClasses} ${animationClasses}`}
         style={style}
       >
         <span className="mr-2">
-          <Icon iconName={iconName} size={16} />
+          {iconBullet}
         </span>
         {children}
       </li>

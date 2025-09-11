@@ -16,7 +16,7 @@ export interface ListProps {
 
 export interface ListItemProps {
   children: ReactNode;
-  iconName?: string; 
+  iconBullet?: ReactNode; 
   tailwindClasses?: string;
   animationObject?: AnimationObject;
   style?: React.CSSProperties;
