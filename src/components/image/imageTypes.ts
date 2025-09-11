@@ -7,5 +7,6 @@ export interface ImageProps {
   height?: string | number;
   animationObject?: AnimationObject;
   tailwindClasses?: string;
+  style?: React.CSSProperties;
   onClick?: () => any; 
 }

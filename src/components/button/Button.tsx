@@ -21,7 +21,10 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={`component-root inline-flex items-center gap-2 ${tailwindClasses} ${animationClasses}`}
-      style={style}
+      style={{
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
+      }}
       onClick={onClick}
     >
       {startIcon && <span className="flex items-center">{startIcon}</span>}

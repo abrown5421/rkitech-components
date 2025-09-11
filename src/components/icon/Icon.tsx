@@ -35,7 +35,10 @@ const Icon: React.FC<IconProps> = ({
   return (
     <div
       className={`component-root ${tailwindClasses} ${animationClasses} ${colorClass}`}
-      style={style}
+      style={{
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style, 
+      }}
     >
       <IconComponent size={size} stroke={hexColor} />
     </div>
