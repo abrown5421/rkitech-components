@@ -8,7 +8,8 @@ const Icon: React.FC<IconProps> = ({
   tailwindClasses = "",
   animationObject,
   style,
-  color = "gray-950",
+  color = "gray",
+  intensity = 950, 
   size = 24,
 }) => {
   const IconComponent = (LucideIcons as any)[iconName];
@@ -26,19 +27,20 @@ const Icon: React.FC<IconProps> = ({
       }`
     : "";
 
-  const [baseColor, intensityStr] = color.split("-");
-  const intensity = parseInt(intensityStr || "500", 10);
+  const colorClass =
+    color === "parent" ? "text-current" : `text-${color}-${intensity}`;
 
-  const colorClass = `text-${baseColor}-${intensity}`;
+  const hexColor = color === "parent" ? undefined : tailwindToHex(color, intensity);
 
   return (
     <div
       className={`component-root ${tailwindClasses} ${animationClasses} ${colorClass}`}
       style={style}
     >
-      <IconComponent size={size} stroke={tailwindToHex(baseColor, intensity)} />
+      <IconComponent size={size} stroke={hexColor} />
     </div>
   );
 };
+
 
 export default Icon;
