@@ -10,7 +10,17 @@ var __export = (target, all) => {
 };
 var Text = ({ text, tailwindClasses = "", animationObject, style }) => {
   const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: `component-root ${tailwindClasses} ${animationClasses}`, style, children: text });
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "div",
+    {
+      className: `component-root ${tailwindClasses} ${animationClasses}`,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      children: text
+    }
+  );
 };
 var Text_default = Text;
 var Container = ({
@@ -25,7 +35,10 @@ var Container = ({
     "div",
     {
       className: `component-root flex ${tailwindClasses} ${animationClasses}`,
-      style,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
       onClick,
       children
     }
@@ -46,7 +59,10 @@ var Button = ({
     "button",
     {
       className: `component-root inline-flex items-center gap-2 ${tailwindClasses} ${animationClasses}`,
-      style,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
       onClick,
       children: [
         startIcon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "flex items-center", children: startIcon }),
@@ -26720,7 +26736,10 @@ var Icon2 = ({
     "div",
     {
       className: `component-root ${tailwindClasses} ${animationClasses} ${colorClass}`,
-      style,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
       children: /* @__PURE__ */ jsxRuntime.jsx(IconComponent, { size, stroke: hexColor })
     }
   );
