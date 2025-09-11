@@ -1,3 +1,1 @@
-export const placeholder = () => {
-    console.log('Hello world')
-}
+export { default as Text } from './components/text/Text';
