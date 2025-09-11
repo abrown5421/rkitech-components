@@ -4,6 +4,7 @@ type AnimationObject = {
     entranceAnimation: string;
     exitAnimation: string;
     isEntering: boolean;
+    delay?: number;
 };
 
 interface TextProps {
