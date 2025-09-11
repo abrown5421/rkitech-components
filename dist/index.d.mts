@@ -1,4 +1,4 @@
-import React$1, { ReactNode } from 'react';
+import React$1, { ReactNode, InputHTMLAttributes } from 'react';
 
 type AnimationObject = {
     entranceAnimation: string;
@@ -90,4 +90,18 @@ declare const List: React$1.FC<ListProps>;
 
 declare const ListItem: React$1.FC<ListItemProps>;
 
-export { Button, Container, Icon, Image, List, ListItem, Text };
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
+    animationObject?: AnimationObject;
+    tailwindClasses?: string;
+    label?: string;
+    error?: boolean;
+    helperText?: string;
+    startAdornment?: ReactNode;
+    endAdornment?: ReactNode;
+    multiline?: boolean;
+    rows?: number | 'fill';
+}
+
+declare const Input: React$1.FC<InputProps>;
+
+export { Button, Container, Icon, Image, Input, List, ListItem, Text };

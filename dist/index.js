@@ -26851,6 +26851,96 @@ var ListItem = ({
   );
 };
 var ListItem_default = ListItem;
+var Input = ({
+  label,
+  tailwindClasses = "",
+  animationObject,
+  error = false,
+  helperText,
+  startAdornment,
+  endAdornment,
+  value,
+  multiline = false,
+  rows = 3,
+  onFocus,
+  onBlur,
+  onChange,
+  disabled = false,
+  ...rest
+}) => {
+  const [focused, setFocused] = react.useState(false);
+  const hasValue = value !== void 0 && value !== null && String(value).length > 0;
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus?.(e);
+  };
+  const handleBlur = (e) => {
+    setFocused(false);
+    onBlur?.(e);
+  };
+  const handleChange = (e) => {
+    onChange?.(e);
+  };
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const containerClasses = `
+    relative w-full
+    ${rows === "fill" ? "flex-grow" : ""}
+    ${tailwindClasses}
+    ${animationClasses}
+  `.trim();
+  const inputWrapperClasses = `
+    relative flex border rounded-md transition-colors duration-200
+    ${rows === "fill" ? "h-full" : "items-center"}
+    ${disabled ? "border-gray-200 bg-gray-100" : error ? "border-red-500" : focused ? "border-amber-500 ring-2 ring-amber-500" : "border-gray-300"}
+  `.trim();
+  const baseInputClasses = `
+    peer w-full text-base placeholder-transparent focus:outline-none
+    ${startAdornment ? "pl-10" : "pl-3"}
+    ${endAdornment ? "pr-10" : "pr-3"}
+    ${multiline ? "resize-none pt-2" : "h-12"}
+    ${rows === "fill" ? "flex-grow" : ""}
+    ${disabled ? "cursor-not-allowed text-gray-400 bg-gray-100" : "text-gray-900 bg-transparent"}
+  `.trim();
+  const labelClasses = `
+    absolute transition-all duration-200 px-1 bg-gray-50
+    ${startAdornment ? "left-10" : "left-3"}
+    ${focused || hasValue ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : "text-gray-950"}` : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`}
+  `.trim();
+  const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: containerClasses, children: [
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: inputWrapperClasses, children: [
+      startAdornment && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute left-2 flex items-center text-gray-500", children: startAdornment }),
+      multiline ? /* @__PURE__ */ jsxRuntime.jsx(
+        "textarea",
+        {
+          className: baseInputClasses,
+          rows: typeof rows === "number" ? rows : void 0,
+          onFocus: handleFocus,
+          onBlur: handleBlur,
+          onChange: handleChange,
+          value,
+          disabled,
+          ...rest
+        }
+      ) : /* @__PURE__ */ jsxRuntime.jsx(
+        "input",
+        {
+          className: baseInputClasses,
+          onFocus: handleFocus,
+          onBlur: handleBlur,
+          onChange: handleChange,
+          value,
+          disabled,
+          ...rest
+        }
+      ),
+      label && /* @__PURE__ */ jsxRuntime.jsx("label", { className: labelClasses, children: label }),
+      endAdornment && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute right-2 flex items-center text-gray-500", children: endAdornment })
+    ] }),
+    helperText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClasses, children: helperText })
+  ] });
+};
+var Input_default = Input;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -28506,6 +28596,7 @@ exports.Button = Button_default;
 exports.Container = Container_default;
 exports.Icon = Icon_default;
 exports.Image = Image_default;
+exports.Input = Input_default;
 exports.List = List_default;
 exports.ListItem = ListItem_default;
 exports.Text = Text_default;

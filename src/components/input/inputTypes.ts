@@ -11,4 +11,6 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   endAdornment?: ReactNode;
   multiline?: boolean;
   rows?: number | 'fill';
+  color?: string;
+  intensity?: number;
 }

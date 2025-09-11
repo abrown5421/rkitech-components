@@ -16,6 +16,8 @@ const Input: React.FC<InputProps> = ({
   onBlur,
   onChange,
   disabled = false,
+  color = "amber",
+  intensity = 500,
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
@@ -39,6 +41,10 @@ const Input: React.FC<InputProps> = ({
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
 
+  const focusRingColor = `ring-${color}-${intensity}`;
+  const focusBorderColor = `border-${color}-${intensity}`;
+  const focusLabelColor = `text-${color}-${intensity}`;
+
   const containerClasses = `
     relative w-full
     ${rows === "fill" ? "flex-grow" : ""}
@@ -54,7 +60,7 @@ const Input: React.FC<InputProps> = ({
       : error 
         ? "border-red-500" 
         : focused 
-          ? "border-amber-500 ring-2 ring-amber-500" 
+          ? `${focusBorderColor} ring-2 ${focusRingColor}` 
           : "border-gray-300"
     }
   `.trim();
@@ -75,7 +81,7 @@ const Input: React.FC<InputProps> = ({
     absolute transition-all duration-200 px-1 bg-gray-50
     ${startAdornment ? "left-10" : "left-3"}
     ${focused || hasValue
-      ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : "text-gray-950"}`
+      ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}`
       : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`
     }
   `.trim();
