@@ -53,4 +53,41 @@ interface IconProps {
 
 declare const Icon: React$1.FC<IconProps>;
 
-export { Button, Container, Icon, Text };
+interface ImageProps {
+    src: string;
+    alt?: string;
+    width?: string | number;
+    height?: string | number;
+    animationObject?: AnimationObject;
+    tailwindClasses?: string;
+    style?: React.CSSProperties;
+    onClick?: () => any;
+}
+
+declare const Image: React$1.FC<ImageProps>;
+
+type ListOrientation = "vertical" | "horizontal";
+type ListVariant = "unordered" | "ordered" | "custom";
+interface ListProps {
+    children: ReactNode;
+    orientation?: ListOrientation;
+    variant?: ListVariant;
+    gap?: number;
+    tailwindClasses?: string;
+    animationObject?: AnimationObject;
+    style?: React.CSSProperties;
+}
+interface ListItemProps {
+    children: ReactNode;
+    iconName?: string;
+    tailwindClasses?: string;
+    animationObject?: AnimationObject;
+    style?: React.CSSProperties;
+    onClick?: () => any;
+}
+
+declare const List: React$1.FC<ListProps>;
+
+declare const ListItem: React$1.FC<ListItemProps>;
+
+export { Button, Container, Icon, Image, List, ListItem, Text };

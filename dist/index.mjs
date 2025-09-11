@@ -26743,6 +26743,108 @@ var Icon2 = ({
   );
 };
 var Icon_default = Icon2;
+var Image2 = ({
+  src,
+  alt = "",
+  width,
+  height,
+  animationObject,
+  tailwindClasses = "",
+  onClick,
+  style,
+  ...rest
+}) => {
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const classes = `block ${animationClasses} ${tailwindClasses}`;
+  return /* @__PURE__ */ jsx(
+    "img",
+    {
+      src,
+      alt,
+      onClick,
+      className: classes,
+      style: {
+        width: width ? typeof width === "number" ? `${width}px` : width : void 0,
+        height: height ? typeof height === "number" ? `${height}px` : height : void 0,
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      ...rest
+    }
+  );
+};
+var Image_default = Image2;
+var List2 = ({
+  children,
+  orientation = "vertical",
+  variant = "unordered",
+  gap = 2,
+  tailwindClasses = "",
+  animationObject,
+  style
+}) => {
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  let Wrapper = "div";
+  let baseClasses = "";
+  if (variant === "ordered") {
+    Wrapper = "ol";
+    baseClasses = `list-decimal list-inside space-y-${gap}`;
+  } else if (variant === "unordered") {
+    Wrapper = "ul";
+    baseClasses = `list-disc list-inside space-y-${gap}`;
+  } else {
+    Wrapper = "div";
+    baseClasses = `flex ${orientation === "vertical" ? "flex-col" : "flex-row"} gap-${gap}`;
+  }
+  return /* @__PURE__ */ jsx(
+    Wrapper,
+    {
+      className: `component-root ${baseClasses} ${tailwindClasses} ${animationClasses}`,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      children
+    }
+  );
+};
+var List_default = List2;
+var ListItem = ({
+  children,
+  iconName,
+  tailwindClasses = "",
+  animationObject,
+  onClick,
+  style
+}) => {
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  if (iconName) {
+    return /* @__PURE__ */ jsxs(
+      "li",
+      {
+        className: `component-root list-none flex items-center ${tailwindClasses} ${animationClasses}`,
+        style,
+        children: [
+          /* @__PURE__ */ jsx("span", { className: "mr-2", children: /* @__PURE__ */ jsx(Icon_default, { iconName, size: 16 }) }),
+          children
+        ]
+      }
+    );
+  }
+  return /* @__PURE__ */ jsx(
+    "li",
+    {
+      className: `component-root ${tailwindClasses} ${animationClasses}`,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      onClick,
+      children
+    }
+  );
+};
+var ListItem_default = ListItem;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -28394,6 +28496,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 
-export { Button_default as Button, Container_default as Container, Icon_default as Icon, Text_default as Text };
+export { Button_default as Button, Container_default as Container, Icon_default as Icon, Image_default as Image, List_default as List, ListItem_default as ListItem, Text_default as Text };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map

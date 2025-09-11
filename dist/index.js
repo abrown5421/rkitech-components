@@ -26745,6 +26745,108 @@ var Icon2 = ({
   );
 };
 var Icon_default = Icon2;
+var Image2 = ({
+  src,
+  alt = "",
+  width,
+  height,
+  animationObject,
+  tailwindClasses = "",
+  onClick,
+  style,
+  ...rest
+}) => {
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const classes = `block ${animationClasses} ${tailwindClasses}`;
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "img",
+    {
+      src,
+      alt,
+      onClick,
+      className: classes,
+      style: {
+        width: width ? typeof width === "number" ? `${width}px` : width : void 0,
+        height: height ? typeof height === "number" ? `${height}px` : height : void 0,
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      ...rest
+    }
+  );
+};
+var Image_default = Image2;
+var List2 = ({
+  children,
+  orientation = "vertical",
+  variant = "unordered",
+  gap = 2,
+  tailwindClasses = "",
+  animationObject,
+  style
+}) => {
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  let Wrapper = "div";
+  let baseClasses = "";
+  if (variant === "ordered") {
+    Wrapper = "ol";
+    baseClasses = `list-decimal list-inside space-y-${gap}`;
+  } else if (variant === "unordered") {
+    Wrapper = "ul";
+    baseClasses = `list-disc list-inside space-y-${gap}`;
+  } else {
+    Wrapper = "div";
+    baseClasses = `flex ${orientation === "vertical" ? "flex-col" : "flex-row"} gap-${gap}`;
+  }
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    Wrapper,
+    {
+      className: `component-root ${baseClasses} ${tailwindClasses} ${animationClasses}`,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      children
+    }
+  );
+};
+var List_default = List2;
+var ListItem = ({
+  children,
+  iconName,
+  tailwindClasses = "",
+  animationObject,
+  onClick,
+  style
+}) => {
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  if (iconName) {
+    return /* @__PURE__ */ jsxRuntime.jsxs(
+      "li",
+      {
+        className: `component-root list-none flex items-center ${tailwindClasses} ${animationClasses}`,
+        style,
+        children: [
+          /* @__PURE__ */ jsxRuntime.jsx("span", { className: "mr-2", children: /* @__PURE__ */ jsxRuntime.jsx(Icon_default, { iconName, size: 16 }) }),
+          children
+        ]
+      }
+    );
+  }
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "li",
+    {
+      className: `component-root ${tailwindClasses} ${animationClasses}`,
+      style: {
+        animationDelay: `${animationObject?.delay ?? 0}s`,
+        ...style
+      },
+      onClick,
+      children
+    }
+  );
+};
+var ListItem_default = ListItem;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -28399,6 +28501,9 @@ lucide-react/dist/esm/lucide-react.js:
 exports.Button = Button_default;
 exports.Container = Container_default;
 exports.Icon = Icon_default;
+exports.Image = Image_default;
+exports.List = List_default;
+exports.ListItem = ListItem_default;
 exports.Text = Text_default;
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map
