@@ -1,4 +1,4 @@
-import React$1 from 'react';
+import React$1, { ReactNode } from 'react';
 
 type AnimationObject = {
     entranceAnimation: string;
@@ -15,4 +15,14 @@ interface TextProps {
 
 declare const Text: React$1.FC<TextProps>;
 
-export { Text };
+interface ContainerProps {
+    children: ReactNode;
+    tailwindClasses?: string;
+    animationObject?: AnimationObject;
+    style?: React.CSSProperties;
+    onClick?: () => any;
+}
+
+declare const Container: React$1.FC<ContainerProps>;
+
+export { Container, Text };
