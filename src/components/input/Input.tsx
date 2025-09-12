@@ -78,7 +78,7 @@ const Input: React.FC<InputProps> = ({
   `.trim();
 
   const labelClasses = `
-    absolute transition-all duration-200 px-1 bg-gray-50
+    absolute transition-all duration-200 px-1 
     ${startAdornment ? "left-10" : "left-3"}
     ${focused || hasValue
       ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}`

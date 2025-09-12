@@ -26864,6 +26864,8 @@ var Input = ({
   onBlur,
   onChange,
   disabled = false,
+  color = "amber",
+  intensity = 500,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
@@ -26880,6 +26882,9 @@ var Input = ({
     onChange?.(e);
   };
   const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const focusRingColor = `ring-${color}-${intensity}`;
+  const focusBorderColor = `border-${color}-${intensity}`;
+  const focusLabelColor = `text-${color}-${intensity}`;
   const containerClasses = `
     relative w-full
     ${rows === "fill" ? "flex-grow" : ""}
@@ -26889,7 +26894,7 @@ var Input = ({
   const inputWrapperClasses = `
     relative flex border rounded-md transition-colors duration-200
     ${rows === "fill" ? "h-full" : "items-center"}
-    ${disabled ? "border-gray-200 bg-gray-100" : error ? "border-red-500" : focused ? "border-amber-500 ring-2 ring-amber-500" : "border-gray-300"}
+    ${disabled ? "border-gray-200 bg-gray-100" : error ? "border-red-500" : focused ? `${focusBorderColor} ring-2 ${focusRingColor}` : "border-gray-300"}
   `.trim();
   const baseInputClasses = `
     peer w-full text-base placeholder-transparent focus:outline-none
@@ -26902,7 +26907,7 @@ var Input = ({
   const labelClasses = `
     absolute transition-all duration-200 px-1 bg-gray-50
     ${startAdornment ? "left-10" : "left-3"}
-    ${focused || hasValue ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : "text-gray-950"}` : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`}
+    ${focused || hasValue ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}` : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`}
   `.trim();
   const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
   return /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
