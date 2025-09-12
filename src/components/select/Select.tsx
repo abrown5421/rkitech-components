@@ -13,6 +13,7 @@ const Select: React.FC<SelectProps> = ({
   onFocus,
   onBlur,
   onChange,
+  placeholder,
   disabled = false,
   color = "amber",
   intensity = 500,
@@ -144,6 +145,11 @@ const Select: React.FC<SelectProps> = ({
           disabled={disabled}
           {...rest}
         >
+          {placeholder && (
+            <option value="" disabled hidden>
+              {placeholder}
+            </option>
+          )}
           {children}
         </select>
 

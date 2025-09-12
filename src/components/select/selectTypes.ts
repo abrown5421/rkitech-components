@@ -11,5 +11,6 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   endAdornment?: ReactNode;
   color?: string;
   intensity?: number;
+  placeholder?: string;
   children: ReactNode;
 }

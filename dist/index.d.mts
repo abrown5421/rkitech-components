@@ -1,4 +1,4 @@
-import React$1, { ReactNode, InputHTMLAttributes } from 'react';
+import React$1, { ReactNode, InputHTMLAttributes, SelectHTMLAttributes } from 'react';
 
 type AnimationObject = {
     entranceAnimation: string;
@@ -106,4 +106,19 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'classN
 
 declare const Input: React$1.FC<InputProps>;
 
-export { Button, Container, Icon, Image, Input, List, ListItem, Text };
+interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'className'> {
+    animationObject?: AnimationObject;
+    tailwindClasses?: string;
+    label?: string;
+    error?: boolean;
+    helperText?: string;
+    startAdornment?: ReactNode;
+    endAdornment?: ReactNode;
+    color?: string;
+    intensity?: number;
+    children: ReactNode;
+}
+
+declare const Select: React$1.FC<SelectProps>;
+
+export { Button, Container, Icon, Image, Input, List, ListItem, Select, Text };
