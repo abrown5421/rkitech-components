@@ -6,3 +6,4 @@ export { default as Image } from './components/image/Image';
 export { default as List } from './components/list/List';
 export { default as ListItem } from './components/list/ListItem';
 export { default as Input } from './components/input/Input';
+export { default as Select } from './components/select/Select';
