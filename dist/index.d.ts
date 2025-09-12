@@ -116,6 +116,7 @@ interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'cla
     endAdornment?: ReactNode;
     color?: string;
     intensity?: number;
+    placeholder?: string;
     children: ReactNode;
 }
 

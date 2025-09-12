@@ -26989,6 +26989,7 @@ var Select = ({
   onFocus,
   onBlur,
   onChange,
+  placeholder,
   disabled = false,
   color = "amber",
   intensity = 500,
@@ -27070,7 +27071,7 @@ var Select = ({
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { ref: containerRef, className: containerClasses, children: [
     /* @__PURE__ */ jsxRuntime.jsxs("div", { className: selectWrapperClasses, children: [
       startAdornment && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute left-2 flex items-center text-gray-500 pointer-events-none", children: startAdornment }),
-      /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsxRuntime.jsxs(
         "select",
         {
           className: baseSelectClasses,
@@ -27080,7 +27081,10 @@ var Select = ({
           value,
           disabled,
           ...rest,
-          children
+          children: [
+            placeholder && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", disabled: true, hidden: true, children: placeholder }),
+            children
+          ]
         }
       ),
       label && /* @__PURE__ */ jsxRuntime.jsx(
