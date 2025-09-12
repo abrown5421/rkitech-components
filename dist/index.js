@@ -26871,7 +26871,31 @@ var Input = ({
   ...rest
 }) => {
   const [focused, setFocused] = react.useState(false);
+  const [backgroundStyle, setBackgroundStyle] = react.useState({});
+  const containerRef = react.useRef(null);
   const hasValue = value !== void 0 && value !== null && String(value).length > 0;
+  react.useEffect(() => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element.parentElement || element);
+      const backgroundColor = computedStyle.backgroundColor;
+      let parentElement = element.parentElement;
+      let finalBackground = backgroundColor;
+      while (parentElement && (backgroundColor === "rgba(0, 0, 0, 0)" || backgroundColor === "transparent")) {
+        const parentStyle = window.getComputedStyle(parentElement);
+        const parentBg = parentStyle.backgroundColor;
+        if (parentBg !== "rgba(0, 0, 0, 0)" && parentBg !== "transparent") {
+          finalBackground = parentBg;
+          break;
+        }
+        parentElement = parentElement.parentElement;
+      }
+      if (finalBackground === "rgba(0, 0, 0, 0)" || finalBackground === "transparent") {
+        finalBackground = "#ffffff";
+      }
+      setBackgroundStyle({ backgroundColor: finalBackground });
+    }
+  }, []);
   const handleFocus = (e) => {
     setFocused(true);
     onFocus?.(e);
@@ -26912,7 +26936,7 @@ var Input = ({
     ${focused || hasValue ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}` : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`}
   `.trim();
   const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: containerClasses, children: [
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { ref: containerRef, className: containerClasses, children: [
     /* @__PURE__ */ jsxRuntime.jsxs("div", { className: inputWrapperClasses, children: [
       startAdornment && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute left-2 flex items-center text-gray-500", children: startAdornment }),
       multiline ? /* @__PURE__ */ jsxRuntime.jsx(
@@ -26939,7 +26963,14 @@ var Input = ({
           ...rest
         }
       ),
-      label && /* @__PURE__ */ jsxRuntime.jsx("label", { className: labelClasses, children: label }),
+      label && /* @__PURE__ */ jsxRuntime.jsx(
+        "label",
+        {
+          className: labelClasses,
+          style: focused || hasValue ? backgroundStyle : {},
+          children: label
+        }
+      ),
       endAdornment && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute right-2 flex items-center text-gray-500", children: endAdornment })
     ] }),
     helperText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClasses, children: helperText })
