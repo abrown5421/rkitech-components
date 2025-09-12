@@ -26975,6 +26975,126 @@ var Input = ({
   ] });
 };
 var Input_default = Input;
+var Select = ({
+  label,
+  tailwindClasses = "",
+  animationObject,
+  error = false,
+  helperText,
+  startAdornment,
+  endAdornment,
+  value,
+  onFocus,
+  onBlur,
+  onChange,
+  disabled = false,
+  color = "amber",
+  intensity = 500,
+  children,
+  ...rest
+}) => {
+  const [focused, setFocused] = useState(false);
+  const [backgroundStyle, setBackgroundStyle] = useState({});
+  const containerRef = useRef(null);
+  const hasValue = value !== void 0 && value !== null && String(value).length > 0;
+  useEffect(() => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element.parentElement || element);
+      const backgroundColor = computedStyle.backgroundColor;
+      let parentElement = element.parentElement;
+      let finalBackground = backgroundColor;
+      while (parentElement && (backgroundColor === "rgba(0, 0, 0, 0)" || backgroundColor === "transparent")) {
+        const parentStyle = window.getComputedStyle(parentElement);
+        const parentBg = parentStyle.backgroundColor;
+        if (parentBg !== "rgba(0, 0, 0, 0)" && parentBg !== "transparent") {
+          finalBackground = parentBg;
+          break;
+        }
+        parentElement = parentElement.parentElement;
+      }
+      if (finalBackground === "rgba(0, 0, 0, 0)" || finalBackground === "transparent") {
+        finalBackground = "#ffffff";
+      }
+      setBackgroundStyle({ backgroundColor: finalBackground });
+    }
+  }, []);
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus?.(e);
+  };
+  const handleBlur = (e) => {
+    setFocused(false);
+    onBlur?.(e);
+  };
+  const handleChange = (e) => {
+    onChange?.(e);
+  };
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const focusRingColor = `ring-${color}-${intensity}`;
+  const focusBorderColor = `border-${color}-${intensity}`;
+  const focusLabelColor = `text-${color}-${intensity}`;
+  const containerClasses = `
+    relative w-full
+    ${tailwindClasses}
+    ${animationClasses}
+  `.trim();
+  const selectWrapperClasses = `
+    relative flex border rounded-md transition-colors duration-200 items-center
+    ${disabled ? "border-gray-200 bg-gray-100" : error ? "border-red-500" : focused ? `${focusBorderColor} ring-2 ${focusRingColor}` : "border-gray-300"}
+  `.trim();
+  const baseSelectClasses = `
+    peer w-full h-12 text-base focus:outline-none appearance-none cursor-pointer
+    ${startAdornment ? "pl-10" : "pl-3"}
+    ${endAdornment ? "pr-10" : "pr-8"}
+    ${disabled ? "cursor-not-allowed text-gray-400 bg-gray-100" : "text-gray-900 bg-transparent"}
+  `.trim();
+  const labelClasses = `
+    absolute transition-all duration-200 px-1 pointer-events-none
+    ${startAdornment ? "left-10" : "left-3"}
+    ${focused || hasValue ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}` : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`}
+  `.trim();
+  const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
+  const defaultDropdownArrow = /* @__PURE__ */ jsx(
+    "svg",
+    {
+      className: "w-4 h-4",
+      fill: "none",
+      stroke: "currentColor",
+      viewBox: "0 0 24 24",
+      children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M19 9l-7 7-7-7" })
+    }
+  );
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: containerClasses, children: [
+    /* @__PURE__ */ jsxs("div", { className: selectWrapperClasses, children: [
+      startAdornment && /* @__PURE__ */ jsx("div", { className: "absolute left-2 flex items-center text-gray-500 pointer-events-none", children: startAdornment }),
+      /* @__PURE__ */ jsx(
+        "select",
+        {
+          className: baseSelectClasses,
+          onFocus: handleFocus,
+          onBlur: handleBlur,
+          onChange: handleChange,
+          value,
+          disabled,
+          ...rest,
+          children
+        }
+      ),
+      label && /* @__PURE__ */ jsx(
+        "label",
+        {
+          className: labelClasses,
+          style: focused || hasValue ? backgroundStyle : {},
+          children: label
+        }
+      ),
+      endAdornment ? /* @__PURE__ */ jsx("div", { className: "absolute right-2 flex items-center text-gray-500 pointer-events-none", children: endAdornment }) : /* @__PURE__ */ jsx("div", { className: "absolute right-2 flex items-center text-gray-500 pointer-events-none", children: defaultDropdownArrow })
+    ] }),
+    helperText && /* @__PURE__ */ jsx("p", { className: helperTextClasses, children: helperText })
+  ] });
+};
+var Select_default = Select;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -28626,6 +28746,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 
-export { Button_default as Button, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Text_default as Text };
+export { Button_default as Button, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Select_default as Select, Text_default as Text };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map
