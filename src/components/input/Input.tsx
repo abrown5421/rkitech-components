@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import type { InputProps } from "./inputTypes";
 
 const Input: React.FC<InputProps> = ({
@@ -21,7 +21,38 @@ const Input: React.FC<InputProps> = ({
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
+  const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
+  const containerRef = useRef<HTMLDivElement>(null);
   const hasValue = value !== undefined && value !== null && String(value).length > 0;
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element.parentElement || element);
+      const backgroundColor = computedStyle.backgroundColor;
+      
+      let parentElement = element.parentElement;
+      let finalBackground = backgroundColor;
+      
+      while (parentElement && (backgroundColor === 'rgba(0, 0, 0, 0)' || backgroundColor === 'transparent')) {
+        const parentStyle = window.getComputedStyle(parentElement);
+        const parentBg = parentStyle.backgroundColor;
+        
+        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
+          finalBackground = parentBg;
+          break;
+        }
+        
+        parentElement = parentElement.parentElement;
+      }
+      
+      if (finalBackground === 'rgba(0, 0, 0, 0)' || finalBackground === 'transparent') {
+        finalBackground = '#ffffff';
+      }
+      
+      setBackgroundStyle({ backgroundColor: finalBackground });
+    }
+  }, []);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFocused(true);
@@ -89,7 +120,7 @@ const Input: React.FC<InputProps> = ({
   const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
 
   return (
-    <div className={containerClasses}>
+    <div ref={containerRef} className={containerClasses}>
       <div className={inputWrapperClasses}>
         {startAdornment && (
           <div className="absolute left-2 flex items-center text-gray-500">
@@ -120,7 +151,14 @@ const Input: React.FC<InputProps> = ({
           />
         )}
 
-        {label && <label className={labelClasses}>{label}</label>}
+        {label && (
+          <label 
+            className={labelClasses}
+            style={focused || hasValue ? backgroundStyle : {}}
+          >
+            {label}
+          </label>
+        )}
 
         {endAdornment && (
           <div className="absolute right-2 flex items-center text-gray-500">
