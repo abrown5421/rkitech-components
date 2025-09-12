@@ -100,6 +100,8 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'classN
     endAdornment?: ReactNode;
     multiline?: boolean;
     rows?: number | 'fill';
+    color?: string;
+    intensity?: number;
 }
 
 declare const Input: React$1.FC<InputProps>;
