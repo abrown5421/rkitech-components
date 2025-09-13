@@ -27099,6 +27099,399 @@ var Select = ({
   ] });
 };
 var Select_default = Select;
+var Radio2 = ({
+  label,
+  tailwindClasses = "",
+  animationObject,
+  error = false,
+  helperText,
+  checked,
+  onFocus,
+  onBlur,
+  onChange,
+  disabled = false,
+  color = "amber",
+  intensity = 500,
+  size = "md",
+  ...rest
+}) => {
+  const [focused, setFocused] = useState(false);
+  const [backgroundStyle, setBackgroundStyle] = useState({});
+  const containerRef = useRef(null);
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element.parentElement || element);
+      const backgroundColor = computedStyle.backgroundColor;
+      let parentElement = element.parentElement;
+      let finalBackground = backgroundColor;
+      while (parentElement && (backgroundColor === "rgba(0, 0, 0, 0)" || backgroundColor === "transparent")) {
+        const parentStyle = window.getComputedStyle(parentElement);
+        const parentBg = parentStyle.backgroundColor;
+        if (parentBg !== "rgba(0, 0, 0, 0)" && parentBg !== "transparent") {
+          finalBackground = parentBg;
+          break;
+        }
+        parentElement = parentElement.parentElement;
+      }
+      if (finalBackground === "rgba(0, 0, 0, 0)" || finalBackground === "transparent") {
+        finalBackground = "#ffffff";
+      }
+      setBackgroundStyle({ backgroundColor: finalBackground });
+    }
+  }, []);
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus?.(e);
+  };
+  const handleBlur = (e) => {
+    setFocused(false);
+    onBlur?.(e);
+  };
+  const handleChange = (e) => {
+    onChange?.(e);
+  };
+  const handleLabelClick = () => {
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.click();
+    }
+  };
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const focusRingColor = `ring-${color}-${intensity}`;
+  const checkedColor = `bg-${color}-${intensity}`;
+  const checkedBorderColor = `border-${color}-${intensity}`;
+  const sizeConfig = {
+    sm: { radio: "w-4 h-4", label: "text-sm", gap: "gap-2" },
+    md: { radio: "w-5 h-5", label: "text-base", gap: "gap-3" },
+    lg: { radio: "w-6 h-6", label: "text-lg", gap: "gap-3" }
+  };
+  const currentSize = sizeConfig[size];
+  const containerClasses = `
+    relative flex items-start ${currentSize.gap}
+    ${tailwindClasses}
+    ${animationClasses}
+  `.trim();
+  const radioWrapperClasses = `
+    relative flex items-center justify-center ${currentSize.radio} rounded-full border-2 transition-all duration-200
+    ${disabled ? "border-gray-200 bg-gray-100 cursor-not-allowed" : error ? "border-red-500" : checked ? `${checkedBorderColor} ${checkedColor}` : focused ? `border-gray-400 ring-2 ${focusRingColor}` : "border-gray-300 hover:border-gray-400"}
+    ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+  const labelClasses = `
+    ${currentSize.label} transition-colors duration-200
+    ${disabled ? "text-gray-400 cursor-not-allowed" : error ? "text-red-500" : "text-gray-900"}
+    ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+  const helperTextClasses = `text-sm mt-1 ml-8 ${error ? "text-red-500" : "text-gray-500"}`;
+  const innerDot = checked && /* @__PURE__ */ jsx("div", { className: `
+      ${size === "sm" ? "w-1.5 h-1.5" : size === "md" ? "w-2 h-2" : "w-2.5 h-2.5"} 
+      rounded-full bg-white transition-all duration-200
+    ` });
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", children: [
+    /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
+      /* @__PURE__ */ jsxs("div", { className: radioWrapperClasses, onClick: handleLabelClick, children: [
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            ref: inputRef,
+            type: "radio",
+            className: "sr-only",
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            onChange: handleChange,
+            checked,
+            disabled,
+            ...rest
+          }
+        ),
+        innerDot
+      ] }),
+      label && /* @__PURE__ */ jsx(
+        "label",
+        {
+          className: labelClasses,
+          onClick: handleLabelClick,
+          children: label
+        }
+      )
+    ] }),
+    helperText && /* @__PURE__ */ jsx("p", { className: helperTextClasses, children: helperText })
+  ] });
+};
+var Radio_default = Radio2;
+var Checkbox = ({
+  label,
+  tailwindClasses = "",
+  animationObject,
+  error = false,
+  helperText,
+  checked,
+  indeterminate = false,
+  onFocus,
+  onBlur,
+  onChange,
+  disabled = false,
+  color = "amber",
+  intensity = 500,
+  size = "md",
+  ...rest
+}) => {
+  const [focused, setFocused] = useState(false);
+  const [backgroundStyle, setBackgroundStyle] = useState({});
+  const containerRef = useRef(null);
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.indeterminate = indeterminate;
+    }
+  }, [indeterminate]);
+  useEffect(() => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element.parentElement || element);
+      const backgroundColor = computedStyle.backgroundColor;
+      let parentElement = element.parentElement;
+      let finalBackground = backgroundColor;
+      while (parentElement && (backgroundColor === "rgba(0, 0, 0, 0)" || backgroundColor === "transparent")) {
+        const parentStyle = window.getComputedStyle(parentElement);
+        const parentBg = parentStyle.backgroundColor;
+        if (parentBg !== "rgba(0, 0, 0, 0)" && parentBg !== "transparent") {
+          finalBackground = parentBg;
+          break;
+        }
+        parentElement = parentElement.parentElement;
+      }
+      if (finalBackground === "rgba(0, 0, 0, 0)" || finalBackground === "transparent") {
+        finalBackground = "#ffffff";
+      }
+      setBackgroundStyle({ backgroundColor: finalBackground });
+    }
+  }, []);
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus?.(e);
+  };
+  const handleBlur = (e) => {
+    setFocused(false);
+    onBlur?.(e);
+  };
+  const handleChange = (e) => {
+    onChange?.(e);
+  };
+  const handleLabelClick = () => {
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.click();
+    }
+  };
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const focusRingColor = `ring-${color}-${intensity}`;
+  const checkedColor = `bg-${color}-${intensity}`;
+  const checkedBorderColor = `border-${color}-${intensity}`;
+  const sizeConfig = {
+    sm: { checkbox: "w-4 h-4", label: "text-sm", gap: "gap-2", icon: "w-2.5 h-2.5" },
+    md: { checkbox: "w-5 h-5", label: "text-base", gap: "gap-3", icon: "w-3 h-3" },
+    lg: { checkbox: "w-6 h-6", label: "text-lg", gap: "gap-3", icon: "w-4 h-4" }
+  };
+  const currentSize = sizeConfig[size];
+  const containerClasses = `
+    relative flex items-start ${currentSize.gap}
+    ${tailwindClasses}
+    ${animationClasses}
+  `.trim();
+  const checkboxWrapperClasses = `
+    relative flex items-center justify-center ${currentSize.checkbox} rounded border-2 transition-all duration-200
+    ${disabled ? "border-gray-200 bg-gray-100 cursor-not-allowed" : error ? "border-red-500" : checked || indeterminate ? `${checkedBorderColor} ${checkedColor}` : focused ? `border-gray-400 ring-2 ${focusRingColor}` : "border-gray-300 hover:border-gray-400"}
+    ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+  const labelClasses = `
+    ${currentSize.label} transition-colors duration-200
+    ${disabled ? "text-gray-400 cursor-not-allowed" : error ? "text-red-500" : "text-gray-900"}
+    ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+  const helperTextClasses = `text-sm mt-1 ml-8 ${error ? "text-red-500" : "text-gray-500"}`;
+  const checkIcon = (checked || indeterminate) && /* @__PURE__ */ jsx(
+    "svg",
+    {
+      className: `${currentSize.icon} text-white transition-all duration-200`,
+      fill: "none",
+      stroke: "currentColor",
+      viewBox: "0 0 24 24",
+      children: indeterminate ? /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 3, d: "M20 12H4" }) : /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 3, d: "M5 13l4 4L19 7" })
+    }
+  );
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", children: [
+    /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
+      /* @__PURE__ */ jsxs("div", { className: checkboxWrapperClasses, onClick: handleLabelClick, children: [
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            ref: inputRef,
+            type: "checkbox",
+            className: "sr-only",
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            onChange: handleChange,
+            checked,
+            disabled,
+            ...rest
+          }
+        ),
+        checkIcon
+      ] }),
+      label && /* @__PURE__ */ jsx(
+        "label",
+        {
+          className: labelClasses,
+          onClick: handleLabelClick,
+          children: label
+        }
+      )
+    ] }),
+    helperText && /* @__PURE__ */ jsx("p", { className: helperTextClasses, children: helperText })
+  ] });
+};
+var Checkbox_default = Checkbox;
+var Switch = ({
+  label,
+  tailwindClasses = "",
+  animationObject,
+  error = false,
+  helperText,
+  checked,
+  onFocus,
+  onBlur,
+  onChange,
+  disabled = false,
+  color = "amber",
+  intensity = 500,
+  size = "md",
+  ...rest
+}) => {
+  const [focused, setFocused] = useState(false);
+  const [backgroundStyle, setBackgroundStyle] = useState({});
+  const containerRef = useRef(null);
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element.parentElement || element);
+      const backgroundColor = computedStyle.backgroundColor;
+      let parentElement = element.parentElement;
+      let finalBackground = backgroundColor;
+      while (parentElement && (backgroundColor === "rgba(0, 0, 0, 0)" || backgroundColor === "transparent")) {
+        const parentStyle = window.getComputedStyle(parentElement);
+        const parentBg = parentStyle.backgroundColor;
+        if (parentBg !== "rgba(0, 0, 0, 0)" && parentBg !== "transparent") {
+          finalBackground = parentBg;
+          break;
+        }
+        parentElement = parentElement.parentElement;
+      }
+      if (finalBackground === "rgba(0, 0, 0, 0)" || finalBackground === "transparent") {
+        finalBackground = "#ffffff";
+      }
+      setBackgroundStyle({ backgroundColor: finalBackground });
+    }
+  }, []);
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus?.(e);
+  };
+  const handleBlur = (e) => {
+    setFocused(false);
+    onBlur?.(e);
+  };
+  const handleChange = (e) => {
+    onChange?.(e);
+  };
+  const handleLabelClick = () => {
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.click();
+    }
+  };
+  const animationClasses = animationObject ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}` : "";
+  const focusRingColor = `ring-${color}-${intensity}`;
+  const checkedColor = `bg-${color}-${intensity}`;
+  const sizeConfig = {
+    sm: {
+      track: "w-8 h-5",
+      thumb: "w-3 h-3",
+      translate: "translate-x-3.5",
+      label: "text-sm",
+      gap: "gap-2"
+    },
+    md: {
+      track: "w-10 h-6",
+      thumb: "w-4 h-4",
+      translate: "translate-x-4",
+      label: "text-base",
+      gap: "gap-3"
+    },
+    lg: {
+      track: "w-12 h-7",
+      thumb: "w-5 h-5",
+      translate: "translate-x-5",
+      label: "text-lg",
+      gap: "gap-3"
+    }
+  };
+  const currentSize = sizeConfig[size];
+  const containerClasses = `
+    relative flex items-start ${currentSize.gap}
+    ${tailwindClasses}
+    ${animationClasses}
+  `.trim();
+  const trackClasses = `
+    relative inline-flex ${currentSize.track} rounded-full border-2 transition-all duration-200
+    ${disabled ? "border-gray-200 bg-gray-100 cursor-not-allowed" : error ? "border-red-500 bg-red-100" : checked ? `${checkedColor} border-transparent` : focused ? `bg-gray-200 border-gray-400 ring-2 ${focusRingColor}` : "bg-gray-200 border-gray-300 hover:bg-gray-300"}
+    ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+  const thumbClasses = `
+    inline-block ${currentSize.thumb} rounded-full bg-white shadow-lg transform transition-transform duration-200
+    ${checked ? currentSize.translate : "translate-x-0.5"}
+    ${disabled ? "shadow-sm" : "shadow-lg"}
+  `.trim();
+  const labelClasses = `
+    ${currentSize.label} transition-colors duration-200
+    ${disabled ? "text-gray-400 cursor-not-allowed" : error ? "text-red-500" : "text-gray-900"}
+    ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+  const helperTextClasses = `text-sm mt-1 ml-12 ${error ? "text-red-500" : "text-gray-500"}`;
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", children: [
+    /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
+      /* @__PURE__ */ jsxs("div", { className: trackClasses, onClick: handleLabelClick, children: [
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            ref: inputRef,
+            type: "checkbox",
+            className: "sr-only",
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            onChange: handleChange,
+            checked,
+            disabled,
+            ...rest
+          }
+        ),
+        /* @__PURE__ */ jsx("span", { className: thumbClasses })
+      ] }),
+      label && /* @__PURE__ */ jsx(
+        "label",
+        {
+          className: labelClasses,
+          onClick: handleLabelClick,
+          children: label
+        }
+      )
+    ] }),
+    helperText && /* @__PURE__ */ jsx("p", { className: helperTextClasses, children: helperText })
+  ] });
+};
+var Switch_default = Switch;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -28750,6 +29143,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 
-export { Button_default as Button, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Select_default as Select, Text_default as Text };
+export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map

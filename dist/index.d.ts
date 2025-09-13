@@ -122,4 +122,44 @@ interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'cla
 
 declare const Select: React$1.FC<SelectProps>;
 
-export { Button, Container, Icon, Image, Input, List, ListItem, Select, Text };
+interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
+    animationObject?: AnimationObject;
+    tailwindClasses?: string;
+    label?: string;
+    error?: boolean;
+    helperText?: string;
+    color?: string;
+    intensity?: number;
+    size?: 'sm' | 'md' | 'lg';
+}
+
+declare const Radio: React$1.FC<RadioProps>;
+
+interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
+    animationObject?: AnimationObject;
+    tailwindClasses?: string;
+    label?: string;
+    error?: boolean;
+    helperText?: string;
+    indeterminate?: boolean;
+    color?: string;
+    intensity?: number;
+    size?: 'sm' | 'md' | 'lg';
+}
+
+declare const Checkbox: React$1.FC<CheckboxProps>;
+
+interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
+    animationObject?: AnimationObject;
+    tailwindClasses?: string;
+    label?: string;
+    error?: boolean;
+    helperText?: string;
+    color?: string;
+    intensity?: number;
+    size?: 'sm' | 'md' | 'lg';
+}
+
+declare const Switch: React$1.FC<SwitchProps>;
+
+export { Button, Checkbox, Container, Icon, Image, Input, List, ListItem, Radio, Select, Switch, Text };
