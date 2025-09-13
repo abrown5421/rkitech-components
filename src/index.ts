@@ -10,3 +10,4 @@ export { default as Select } from './components/select/Select';
 export { default as Radio } from './components/radio/Radio';
 export { default as Checkbox } from './components/checkbox/Checkbox';
 export { default as Switch } from './components/switch/Switch';
+export { default as Loader } from './components/loader/Loader';
