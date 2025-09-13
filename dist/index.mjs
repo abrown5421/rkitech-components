@@ -26987,10 +26987,10 @@ var Select = ({
   onFocus,
   onBlur,
   onChange,
-  placeholder,
   disabled = false,
   color = "amber",
   intensity = 500,
+  placeholder,
   children,
   ...rest
 }) => {
@@ -27080,7 +27080,7 @@ var Select = ({
           disabled,
           ...rest,
           children: [
-            placeholder && /* @__PURE__ */ jsx("option", { value: "", disabled: true, hidden: true, children: placeholder }),
+            !hasValue && /* @__PURE__ */ jsx("option", { value: "", disabled: true, hidden: true, children: placeholder || "" }),
             children
           ]
         }
