@@ -7,3 +7,6 @@ export { default as List } from './components/list/List';
 export { default as ListItem } from './components/list/ListItem';
 export { default as Input } from './components/input/Input';
 export { default as Select } from './components/select/Select';
+export { default as Radio } from './components/radio/Radio';
+export { default as Checkbox } from './components/checkbox/Checkbox';
+export { default as Switch } from './components/switch/Switch';
