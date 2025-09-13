@@ -1,0 +1,619 @@
+/* src/components/loader/loaderStyles.css */
+.loader-dot-1 {
+  width: 60px;
+  aspect-ratio: 2;
+  --_g:
+    no-repeat radial-gradient(
+      circle closest-side,
+      var(--loader-color, #000) 90%,
+      transparent);
+  background:
+    var(--_g) 0% 50%,
+    var(--_g) 50% 50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: loader-dot-1-anim 1s infinite linear;
+}
+@keyframes loader-dot-1-anim {
+  20% {
+    background-position:
+      0% 0%,
+      50% 50%,
+      100% 50%;
+  }
+  40% {
+    background-position:
+      0% 100%,
+      50% 0%,
+      100% 50%;
+  }
+  60% {
+    background-position:
+      0% 50%,
+      50% 100%,
+      100% 0%;
+  }
+  80% {
+    background-position:
+      0% 50%,
+      50% 50%,
+      100% 100%;
+  }
+}
+.loader-dot-2 {
+  width: 60px;
+  aspect-ratio: 4;
+  --_g:
+    no-repeat radial-gradient(
+      circle closest-side,
+      var(--loader-color, #000) 90%,
+      transparent);
+  background:
+    var(--_g) 0% 50%,
+    var(--_g) 50% 50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 100%;
+  animation: loader-dot-2-anim 1s infinite linear;
+}
+@keyframes loader-dot-2-anim {
+  33% {
+    background-size:
+      calc(100%/3) 0%,
+      calc(100%/3) 100%,
+      calc(100%/3) 100%;
+  }
+  50% {
+    background-size:
+      calc(100%/3) 100%,
+      calc(100%/3) 0%,
+      calc(100%/3) 100%;
+  }
+  66% {
+    background-size:
+      calc(100%/3) 100%,
+      calc(100%/3) 100%,
+      calc(100%/3) 0%;
+  }
+}
+.loader-dot-3 {
+  width: 15px;
+  aspect-ratio: 1;
+  position: relative;
+  animation: loader-dot-3-scale 1.5s infinite steps(2);
+}
+.loader-dot-3::before,
+.loader-dot-3::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--loader-color, #000);
+}
+.loader-dot-3::before {
+  box-shadow: 26px 0 var(--loader-color, #000);
+  transform: translateX(-26px);
+  animation: loader-dot-3-shadow 0.75s infinite linear alternate;
+}
+.loader-dot-3::after {
+  transform: translateX(13px) rotate(0deg) translateX(13px);
+  animation: loader-dot-3-rotate 0.75s infinite linear alternate;
+}
+@keyframes loader-dot-3-scale {
+  0%, 49.9% {
+    transform: scale(1);
+  }
+  50%, 100% {
+    transform: scale(-1);
+  }
+}
+@keyframes loader-dot-3-shadow {
+  100% {
+    box-shadow: 52px 0 var(--loader-color, #000);
+  }
+}
+@keyframes loader-dot-3-rotate {
+  100% {
+    transform: translateX(13px) rotate(-180deg) translateX(13px);
+  }
+}
+.loader-dot-4 {
+  width: 35px;
+  aspect-ratio: 1;
+  --_g:
+    no-repeat radial-gradient(
+      circle closest-side,
+      var(--loader-color, #000) 90%,
+      transparent);
+  background:
+    var(--_g) 0 0,
+    var(--_g) 0 100%,
+    var(--_g) 100% 100%;
+  background-size: 40% 40%;
+  animation: loader-dot-4-anim 1s infinite linear;
+}
+@keyframes loader-dot-4-anim {
+  25% {
+    background-position:
+      100% 0,
+      0 100%,
+      100% 100%;
+  }
+  50% {
+    background-position:
+      100% 0,
+      0 0,
+      100% 100%;
+  }
+  75% {
+    background-position:
+      100% 0,
+      0 0,
+      0 100%;
+  }
+  100% {
+    background-position:
+      100% 100%,
+      0 0,
+      0 100%;
+  }
+}
+.loader-dot-5 {
+  width: 40px;
+  aspect-ratio: 1.154;
+  --_g:
+    no-repeat radial-gradient(
+      farthest-side,
+      var(--loader-color, #000) 90%,
+      transparent);
+  background:
+    var(--_g) 50% 0,
+    var(--_g) 0 100%,
+    var(--_g) 100% 100%;
+  background-size: 35% calc(35%*1.154);
+  animation: loader-dot-5-anim 1s infinite;
+}
+@keyframes loader-dot-5-anim {
+  50%, 100% {
+    background-position:
+      100% 100%,
+      50% 0,
+      0 100%;
+  }
+}
+.loader-bar-1 {
+  width: 45px;
+  aspect-ratio: 1;
+  --c: no-repeat linear-gradient(var(--loader-color, #000) 0 0);
+  background:
+    var(--c) 0% 50%,
+    var(--c) 50% 50%,
+    var(--c) 100% 50%;
+  background-size: 20% 100%;
+  animation: loader-bar-1-anim 1s infinite linear;
+}
+@keyframes loader-bar-1-anim {
+  0% {
+    background-size:
+      20% 100%,
+      20% 100%,
+      20% 100%;
+  }
+  33% {
+    background-size:
+      20% 10%,
+      20% 100%,
+      20% 100%;
+  }
+  50% {
+    background-size:
+      20% 100%,
+      20% 10%,
+      20% 100%;
+  }
+  66% {
+    background-size:
+      20% 100%,
+      20% 100%,
+      20% 10%;
+  }
+  100% {
+    background-size:
+      20% 100%,
+      20% 100%,
+      20% 100%;
+  }
+}
+.loader-bar-2 {
+  width: 45px;
+  aspect-ratio: 1;
+  --c:
+    no-repeat linear-gradient(
+      var(--loader-color, #000) calc(50% - 10px),
+      transparent 0 calc(50% + 10px),
+      var(--loader-color, #000) 0);
+  background:
+    var(--c) 0% 100%,
+    var(--c) 50% 100%,
+    var(--c) 100% 100%;
+  background-size: 20% calc(200% + 20px);
+  animation: loader-bar-2-anim 1s infinite linear;
+}
+@keyframes loader-bar-2-anim {
+  33% {
+    background-position:
+      0% 50%,
+      50% 100%,
+      100% 100%;
+  }
+  50% {
+    background-position:
+      0% 0%,
+      50% 50%,
+      100% 100%;
+  }
+  66% {
+    background-position:
+      0% 0%,
+      50% 0%,
+      100% 50%;
+  }
+  100% {
+    background-position:
+      0% 0%,
+      50% 0%,
+      100% 0%;
+  }
+}
+.loader-bar-3 {
+  width: 45px;
+  aspect-ratio: 0.75;
+  --c: no-repeat linear-gradient(var(--loader-color, #000) 0 0);
+  background:
+    var(--c) 0% 50%,
+    var(--c) 50% 50%,
+    var(--c) 100% 50%;
+  animation: loader-bar-3-anim 1s infinite linear alternate;
+}
+@keyframes loader-bar-3-anim {
+  0% {
+    background-size:
+      20% 50%,
+      20% 50%,
+      20% 50%;
+  }
+  20% {
+    background-size:
+      20% 20%,
+      20% 50%,
+      20% 50%;
+  }
+  40% {
+    background-size:
+      20% 100%,
+      20% 20%,
+      20% 50%;
+  }
+  60% {
+    background-size:
+      20% 50%,
+      20% 100%,
+      20% 20%;
+  }
+  80% {
+    background-size:
+      20% 50%,
+      20% 50%,
+      20% 100%;
+  }
+  100% {
+    background-size:
+      20% 50%,
+      20% 50%,
+      20% 50%;
+  }
+}
+.loader-bar-4 {
+  width: 45px;
+  aspect-ratio: 1;
+  --c: no-repeat linear-gradient(var(--loader-color, #000) 0 0);
+  background:
+    var(--c),
+    var(--c),
+    var(--c);
+  animation: loader-bar-4-size 1s infinite, loader-bar-4-pos 1s infinite;
+}
+@keyframes loader-bar-4-size {
+  0%, 100% {
+    background-size: 20% 100%;
+  }
+  33%, 66% {
+    background-size: 20% 40%;
+  }
+}
+@keyframes loader-bar-4-pos {
+  0%, 33% {
+    background-position:
+      0 0,
+      50% 100%,
+      100% 0;
+  }
+  66%, 100% {
+    background-position:
+      0 100%,
+      50% 0,
+      100% 100%;
+  }
+}
+.loader-bar-5 {
+  width: 45px;
+  aspect-ratio: 1;
+  --c: no-repeat linear-gradient(var(--loader-color, #000) 0 0);
+  background:
+    var(--c) 0 0,
+    var(--c) 50% 50%,
+    var(--c) 100% 100%;
+  animation: loader-bar-5-anim 1s infinite alternate;
+}
+@keyframes loader-bar-5-anim {
+  0%, 10% {
+    background-size: 20% 100%;
+  }
+  50% {
+    background-size: 20% 20%;
+  }
+  90%, 100% {
+    background-size: 100% 20%;
+  }
+}
+.loader-spinner-1 {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--loader-color, #000);
+  --_m: conic-gradient(transparent 10%, var(--loader-color, #000)), linear-gradient(var(--loader-color, #000) 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: loader-spinner-1-anim 1s infinite linear;
+}
+@keyframes loader-spinner-1-anim {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.loader-spinner-2 {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #e5e7eb;
+  border-right-color: var(--loader-color, #000);
+  animation: loader-spinner-2-anim 1s infinite linear;
+}
+@keyframes loader-spinner-2-anim {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.loader-spinner-3 {
+  width: 50px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(transparent 10%, var(--loader-color, #000)) content-box;
+  -webkit-mask:
+    repeating-conic-gradient(
+      transparent 0deg,
+      #000 1deg 20deg,
+      transparent 21deg 36deg),
+    radial-gradient(
+      farthest-side,
+      transparent calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: loader-spinner-3-anim 1s infinite steps(10);
+}
+@keyframes loader-spinner-3-anim {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.loader-spinner-4 {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: var(--loader-color, #000) transparent;
+  animation: loader-spinner-4-anim 1s infinite;
+}
+@keyframes loader-spinner-4-anim {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+.loader-spinner-5 {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  border-right-color: var(--loader-color, #000);
+  animation: loader-spinner-5-anim 1s infinite linear;
+}
+.loader-spinner-5::before,
+.loader-spinner-5::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: loader-spinner-5-anim 2s infinite;
+}
+.loader-spinner-5::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+@keyframes loader-spinner-5-anim {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+.loader-progress-1 {
+  width: 120px;
+  height: 20px;
+  background: linear-gradient(var(--loader-color, #000) 0 0) 0/0% no-repeat #ddd;
+  animation: loader-progress-1-anim 2s infinite linear;
+}
+@keyframes loader-progress-1-anim {
+  100% {
+    background-size: 100%;
+  }
+}
+.loader-progress-2 {
+  width: 120px;
+  height: 22px;
+  border-radius: 20px;
+  color: var(--loader-color, #000);
+  border: 2px solid;
+  position: relative;
+}
+.loader-progress-2::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  inset: 0 100% 0 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: loader-progress-2-anim 2s infinite;
+}
+@keyframes loader-progress-2-anim {
+  100% {
+    inset: 0;
+  }
+}
+.loader-progress-3 {
+  width: 120px;
+  height: 20px;
+  -webkit-mask:
+    linear-gradient(
+      90deg,
+      #000 70%,
+      transparent 0) 0/20%;
+  mask:
+    linear-gradient(
+      90deg,
+      #000 70%,
+      transparent 0) 0/20%;
+  background: linear-gradient(var(--loader-color, #000) 0 0) 0/0% no-repeat #ddd;
+  animation: loader-progress-3-anim 2s infinite steps(6);
+}
+@keyframes loader-progress-3-anim {
+  100% {
+    background-size: 120%;
+  }
+}
+.loader-progress-4 {
+  width: 120px;
+  height: 20px;
+  background:
+    linear-gradient(var(--loader-color, #000) 50%, transparent 0),
+    linear-gradient(transparent 50%, var(--loader-color, #000) 0),
+    linear-gradient(var(--loader-color, #000) 50%, transparent 0),
+    linear-gradient(transparent 50%, var(--loader-color, #000) 0),
+    linear-gradient(var(--loader-color, #000) 50%, transparent 0),
+    linear-gradient(transparent 50%, var(--loader-color, #000) 0) #ddd;
+  background-size: calc(100%/6 + 1px) 200%;
+  background-repeat: no-repeat;
+  animation: loader-progress-4-anim 2s infinite;
+}
+@keyframes loader-progress-4-anim {
+  0% {
+    background-position:
+      calc(0*100%/5) 100%,
+      calc(1*100%/5) 0%,
+      calc(2*100%/5) 100%,
+      calc(3*100%/5) 0%,
+      calc(4*100%/5) 100%,
+      calc(5*100%/5) 0%;
+  }
+  16.67% {
+    background-position:
+      calc(0*100%/5) 0%,
+      calc(1*100%/5) 0%,
+      calc(2*100%/5) 100%,
+      calc(3*100%/5) 0%,
+      calc(4*100%/5) 100%,
+      calc(5*100%/5) 0%;
+  }
+  33.33% {
+    background-position:
+      calc(0*100%/5) 0%,
+      calc(1*100%/5) 100%,
+      calc(2*100%/5) 100%,
+      calc(3*100%/5) 0%,
+      calc(4*100%/5) 100%,
+      calc(5*100%/5) 0%;
+  }
+  50% {
+    background-position:
+      calc(0*100%/5) 0%,
+      calc(1*100%/5) 100%,
+      calc(2*100%/5) 0%,
+      calc(3*100%/5) 0%,
+      calc(4*100%/5) 100%,
+      calc(5*100%/5) 0%;
+  }
+  66.67% {
+    background-position:
+      calc(0*100%/5) 0%,
+      calc(1*100%/5) 100%,
+      calc(2*100%/5) 0%,
+      calc(3*100%/5) 100%,
+      calc(4*100%/5) 100%,
+      calc(5*100%/5) 0%;
+  }
+  83.33% {
+    background-position:
+      calc(0*100%/5) 0%,
+      calc(1*100%/5) 100%,
+      calc(2*100%/5) 0%,
+      calc(3*100%/5) 100%,
+      calc(4*100%/5) 0%,
+      calc(5*100%/5) 0%;
+  }
+  100% {
+    background-position:
+      calc(0*100%/5) 0%,
+      calc(1*100%/5) 100%,
+      calc(2*100%/5) 0%,
+      calc(3*100%/5) 100%,
+      calc(4*100%/5) 0%,
+      calc(5*100%/5) 100%;
+  }
+}
+.loader-progress-5 {
+  height: 4px;
+  width: 130px;
+  --c: no-repeat linear-gradient(var(--loader-color, #000) 0 0);
+  background:
+    var(--c),
+    var(--c),
+    #d7b8fc;
+  background-size: 60% 100%;
+  animation: loader-progress-5-anim 3s infinite;
+}
+@keyframes loader-progress-5-anim {
+  0% {
+    background-position: -150% 0, -150% 0;
+  }
+  66% {
+    background-position: 250% 0, -150% 0;
+  }
+  100% {
+    background-position: 250% 0, 250% 0;
+  }
+}
+/*# sourceMappingURL=index.css.map */

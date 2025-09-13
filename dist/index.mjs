@@ -27492,6 +27492,34 @@ var Switch = ({
   ] });
 };
 var Switch_default = Switch;
+var Loader2 = ({
+  show,
+  color = "blue",
+  intensity = 500,
+  type,
+  variant,
+  tailwindClasses = "",
+  style = {}
+}) => {
+  if (!show) return null;
+  const hexColor = tailwindToHex(color, intensity);
+  const getClassName = () => {
+    const baseClass = `loader-${type.toLowerCase()}-${variant}`;
+    return `${baseClass} ${tailwindClasses}`.trim();
+  };
+  const loaderStyle = {
+    ...style,
+    "--loader-color": hexColor
+  };
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: getClassName(),
+      style: loaderStyle
+    }
+  );
+};
+var Loader_default = Loader2;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -29143,6 +29171,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 
-export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text };
+export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Loader_default as Loader, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map
