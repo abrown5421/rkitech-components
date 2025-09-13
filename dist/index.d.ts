@@ -162,4 +162,16 @@ interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'class
 
 declare const Switch: React$1.FC<SwitchProps>;
 
-export { Button, Checkbox, Container, Icon, Image, Input, List, ListItem, Radio, Select, Switch, Text };
+interface LoaderProps {
+    show: boolean;
+    color?: TailwindColor;
+    intensity?: TailwindIntensity;
+    type: 'Dots' | 'Bars' | 'Spinner' | 'Progress';
+    variant: number;
+    tailwindClasses?: string;
+    style?: React.CSSProperties;
+}
+
+declare const Loader: React$1.FC<LoaderProps>;
+
+export { Button, Checkbox, Container, Icon, Image, Input, List, ListItem, Loader, Radio, Select, Switch, Text };

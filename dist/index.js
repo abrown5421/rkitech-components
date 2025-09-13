@@ -27494,6 +27494,34 @@ var Switch = ({
   ] });
 };
 var Switch_default = Switch;
+var Loader2 = ({
+  show,
+  color = "blue",
+  intensity = 500,
+  type,
+  variant,
+  tailwindClasses = "",
+  style = {}
+}) => {
+  if (!show) return null;
+  const hexColor = tailwindToHex(color, intensity);
+  const getClassName = () => {
+    const baseClass = `loader-${type.toLowerCase()}-${variant}`;
+    return `${baseClass} ${tailwindClasses}`.trim();
+  };
+  const loaderStyle = {
+    ...style,
+    "--loader-color": hexColor
+  };
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "div",
+    {
+      className: getClassName(),
+      style: loaderStyle
+    }
+  );
+};
+var Loader_default = Loader2;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -29153,6 +29181,7 @@ exports.Image = Image_default;
 exports.Input = Input_default;
 exports.List = List_default;
 exports.ListItem = ListItem_default;
+exports.Loader = Loader_default;
 exports.Radio = Radio_default;
 exports.Select = Select_default;
 exports.Switch = Switch_default;
