@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import type { CheckboxProps } from "./checkboxTypes";
+import type { SwitchProps } from "./switchTypes";
 
-const Checkbox: React.FC<CheckboxProps> = ({
+const Switch: React.FC<SwitchProps> = ({
   label,
   tailwindClasses = "",
   animationObject,
   error = false,
   helperText,
   checked,
-  indeterminate = false,
   onFocus,
   onBlur,
   onChange,
@@ -22,12 +21,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.indeterminate = indeterminate;
-    }
-  }, [indeterminate]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -85,12 +78,29 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const focusRingColor = `ring-${color}-${intensity}`;
   const checkedColor = `bg-${color}-${intensity}`;
-  const checkedBorderColor = `border-${color}-${intensity}`;
 
   const sizeConfig = {
-    sm: { checkbox: "w-4 h-4", label: "text-sm", gap: "gap-2", icon: "w-2.5 h-2.5" },
-    md: { checkbox: "w-5 h-5", label: "text-base", gap: "gap-3", icon: "w-3 h-3" },
-    lg: { checkbox: "w-6 h-6", label: "text-lg", gap: "gap-3", icon: "w-4 h-4" }
+    sm: { 
+      track: "w-8 h-5", 
+      thumb: "w-3 h-3", 
+      translate: "translate-x-3.5", 
+      label: "text-sm", 
+      gap: "gap-2" 
+    },
+    md: { 
+      track: "w-10 h-6", 
+      thumb: "w-4 h-4", 
+      translate: "translate-x-4", 
+      label: "text-base", 
+      gap: "gap-3" 
+    },
+    lg: { 
+      track: "w-12 h-7", 
+      thumb: "w-5 h-5", 
+      translate: "translate-x-5", 
+      label: "text-lg", 
+      gap: "gap-3" 
+    }
   };
 
   const currentSize = sizeConfig[size];
@@ -101,19 +111,25 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ${animationClasses}
   `.trim();
 
-  const checkboxWrapperClasses = `
-    relative flex items-center justify-center ${currentSize.checkbox} rounded border-2 transition-all duration-200
+  const trackClasses = `
+    relative inline-flex ${currentSize.track} rounded-full border-2 transition-all duration-200
     ${disabled 
       ? "border-gray-200 bg-gray-100 cursor-not-allowed" 
       : error 
-        ? "border-red-500" 
-        : checked || indeterminate
-          ? `${checkedBorderColor} ${checkedColor}`
+        ? "border-red-500 bg-red-100" 
+        : checked
+          ? `${checkedColor} border-transparent`
           : focused 
-            ? `border-gray-400 ring-2 ${focusRingColor}` 
-            : "border-gray-300 hover:border-gray-400"
+            ? `bg-gray-200 border-gray-400 ring-2 ${focusRingColor}` 
+            : "bg-gray-200 border-gray-300 hover:bg-gray-300"
     }
     ${!disabled ? "cursor-pointer" : ""}
+  `.trim();
+
+  const thumbClasses = `
+    inline-block ${currentSize.thumb} rounded-full bg-white shadow-lg transform transition-transform duration-200
+    ${checked ? currentSize.translate : "translate-x-0.5"}
+    ${disabled ? "shadow-sm" : "shadow-lg"}
   `.trim();
 
   const labelClasses = `
@@ -127,27 +143,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();
 
-  const helperTextClasses = `text-sm mt-1 ml-8 ${error ? "text-red-500" : "text-gray-500"}`;
-
-  const checkIcon = (checked || indeterminate) && (
-    <svg 
-      className={`${currentSize.icon} text-white transition-all duration-200`}
-      fill="none" 
-      stroke="currentColor" 
-      viewBox="0 0 24 24"
-    >
-      {indeterminate ? (
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M20 12H4" />
-      ) : (
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-      )}
-    </svg>
-  );
+  const helperTextClasses = `text-sm mt-1 ml-12 ${error ? "text-red-500" : "text-gray-500"}`;
 
   return (
     <div ref={containerRef} className="w-full">
       <div className={containerClasses}>
-        <div className={checkboxWrapperClasses} onClick={handleLabelClick}>
+        <div className={trackClasses} onClick={handleLabelClick}>
           <input
             ref={inputRef}
             type="checkbox"
@@ -159,7 +160,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             disabled={disabled}
             {...rest}
           />
-          {checkIcon}
+          <span className={thumbClasses} />
         </div>
 
         {label && (
@@ -177,4 +178,4 @@ const Checkbox: React.FC<CheckboxProps> = ({
   );
 };
 
-export default Checkbox;
+export default Switch;
