@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import stylePlugin from "esbuild-style-plugin";
 
 export default defineConfig({
   entry: ["src/index.ts"],
@@ -9,7 +10,5 @@ export default defineConfig({
   splitting: false,
   treeshake: true,
   external: ["react", "react-dom"],
-  loader: {
-    ".css": "css",
-  },
+  esbuildPlugins: [stylePlugin()],
 });

@@ -1,11 +1,13 @@
 {
   "name": "rkitech-components",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "rkitech-components — a small React UI component library",
-  "main": "dist/index.js", 
-  "module": "dist/index.mjs",  
-  "types": "dist/index.d.ts", 
-  "files": ["dist"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -24,12 +26,13 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "esbuild-style-plugin": "^1.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.0.0",
     "tsup": "^6.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0"
+    "typescript": "^5.0.0"
   },
   "license": "MIT"
 }
