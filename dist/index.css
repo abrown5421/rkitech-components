@@ -1,12 +1,8 @@
-/* src/components/loader/loaderStyles.css */
+/* stylePlugin:C:\Users\Krispy Lad\stuff\rkitech\rkitech-components\src\components\loader\loaderStyles.css */
 .loader-dot-1 {
   width: 60px;
   aspect-ratio: 2;
-  --_g:
-    no-repeat radial-gradient(
-      circle closest-side,
-      var(--loader-color, #000) 90%,
-      transparent);
+  --_g: no-repeat radial-gradient(circle closest-side, var(--loader-color, #000) 90%, transparent);
   background:
     var(--_g) 0% 50%,
     var(--_g) 50% 50%,
@@ -43,11 +39,7 @@
 .loader-dot-2 {
   width: 60px;
   aspect-ratio: 4;
-  --_g:
-    no-repeat radial-gradient(
-      circle closest-side,
-      var(--loader-color, #000) 90%,
-      transparent);
+  --_g: no-repeat radial-gradient(circle closest-side, var(--loader-color, #000) 90%, transparent);
   background:
     var(--_g) 0% 50%,
     var(--_g) 50% 50%,
@@ -119,11 +111,7 @@
 .loader-dot-4 {
   width: 35px;
   aspect-ratio: 1;
-  --_g:
-    no-repeat radial-gradient(
-      circle closest-side,
-      var(--loader-color, #000) 90%,
-      transparent);
+  --_g: no-repeat radial-gradient(circle closest-side, var(--loader-color, #000) 90%, transparent);
   background:
     var(--_g) 0 0,
     var(--_g) 0 100%,
@@ -160,11 +148,7 @@
 .loader-dot-5 {
   width: 40px;
   aspect-ratio: 1.154;
-  --_g:
-    no-repeat radial-gradient(
-      farthest-side,
-      var(--loader-color, #000) 90%,
-      transparent);
+  --_g: no-repeat radial-gradient(farthest-side, var(--loader-color, #000) 90%, transparent);
   background:
     var(--_g) 50% 0,
     var(--_g) 0 100%,
@@ -226,11 +210,7 @@
 .loader-bar-2 {
   width: 45px;
   aspect-ratio: 1;
-  --c:
-    no-repeat linear-gradient(
-      var(--loader-color, #000) calc(50% - 10px),
-      transparent 0 calc(50% + 10px),
-      var(--loader-color, #000) 0);
+  --c: no-repeat linear-gradient(var(--loader-color, #000) calc(50% - 10px), transparent 0 calc(50% + 10px), var(--loader-color, #000) 0);
   background:
     var(--c) 0% 100%,
     var(--c) 50% 100%,
@@ -403,15 +383,7 @@
   border-radius: 50%;
   padding: 1px;
   background: conic-gradient(transparent 10%, var(--loader-color, #000)) content-box;
-  -webkit-mask:
-    repeating-conic-gradient(
-      transparent 0deg,
-      #000 1deg 20deg,
-      transparent 21deg 36deg),
-    radial-gradient(
-      farthest-side,
-      transparent calc(100% - var(--b) - 1px),
-      #000 calc(100% - var(--b)));
+  -webkit-mask: repeating-conic-gradient(transparent 0deg, #000 1deg 20deg, transparent 21deg 36deg), radial-gradient(farthest-side, transparent calc(100% - var(--b) - 1px), #000 calc(100% - var(--b)));
   -webkit-mask-composite: destination-in;
   mask-composite: intersect;
   animation: loader-spinner-3-anim 1s infinite steps(10);
@@ -497,16 +469,8 @@
 .loader-progress-3 {
   width: 120px;
   height: 20px;
-  -webkit-mask:
-    linear-gradient(
-      90deg,
-      #000 70%,
-      transparent 0) 0/20%;
-  mask:
-    linear-gradient(
-      90deg,
-      #000 70%,
-      transparent 0) 0/20%;
+  -webkit-mask: linear-gradient(90deg, #000 70%, transparent 0) 0/20%;
+  mask: linear-gradient(90deg, #000 70%, transparent 0) 0/20%;
   background: linear-gradient(var(--loader-color, #000) 0 0) 0/0% no-repeat #ddd;
   animation: loader-progress-3-anim 2s infinite steps(6);
 }
