@@ -41141,5 +41141,6 @@ exports.Radio = Radio_default;
 exports.Select = Select_default;
 exports.Switch = Switch_default;
 exports.Text = Text_default;
+exports.tailwindToHex = tailwindToHex;
 //# sourceMappingURL=out.js.map
 //# sourceMappingURL=index.js.map

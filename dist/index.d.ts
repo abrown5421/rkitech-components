@@ -176,4 +176,6 @@ interface LoaderProps {
 
 declare const Loader: React$1.FC<LoaderProps>;
 
-export { Button, Checkbox, Container, Icon, Image, Input, List, ListItem, Loader, Radio, Select, Switch, Text };
+declare function tailwindToHex(colorName: string, intensity: number): string;
+
+export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, Radio, Select, Switch, TailwindColor, TailwindIntensity, Text, tailwindToHex };
