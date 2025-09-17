@@ -21,5 +21,5 @@ export interface ListItemProps {
   tailwindClasses?: string;
   animationObject?: AnimationObject;
   style?: React.CSSProperties;
-  onClick?: (() => any) | ((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => any); 
+  onClick?: React.MouseEventHandler<HTMLLIElement>;
 }

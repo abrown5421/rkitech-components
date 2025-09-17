@@ -26779,6 +26779,7 @@ var List2 = ({
   children,
   orientation = "vertical",
   variant = "unordered",
+  bullets = true,
   gap = 2,
   tailwindClasses = "",
   animationObject,
@@ -26789,10 +26790,10 @@ var List2 = ({
   let baseClasses = "";
   if (variant === "ordered") {
     Wrapper = "ol";
-    baseClasses = `list-decimal list-inside space-y-${gap}`;
+    baseClasses = `${bullets ? "list-decimal list-inside" : ""} space-y-${gap}`;
   } else if (variant === "unordered") {
     Wrapper = "ul";
-    baseClasses = `list-disc list-inside space-y-${gap}`;
+    baseClasses = `${bullets ? "list-disc list-inside" : ""} space-y-${gap}`;
   } else {
     Wrapper = "div";
     baseClasses = `flex ${orientation === "vertical" ? "flex-col" : "flex-row"} gap-${gap}`;
