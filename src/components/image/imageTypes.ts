@@ -8,5 +8,5 @@ export interface ImageProps {
   animationObject?: AnimationObject;
   tailwindClasses?: string;
   style?: React.CSSProperties;
-  onClick?: () => any; 
+  onClick?: (() => any) | ((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => any); 
 }

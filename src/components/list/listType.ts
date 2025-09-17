@@ -8,6 +8,7 @@ export interface ListProps {
   children: ReactNode;
   orientation?: ListOrientation;
   variant?: ListVariant; 
+  bullets?: boolean;
   gap?: number; 
   tailwindClasses?: string;
   animationObject?: AnimationObject;
@@ -20,5 +21,5 @@ export interface ListItemProps {
   tailwindClasses?: string;
   animationObject?: AnimationObject;
   style?: React.CSSProperties;
-  onClick?: () => any; 
+  onClick?: (() => any) | ((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => any); 
 }

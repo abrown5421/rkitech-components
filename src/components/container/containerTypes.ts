@@ -6,5 +6,5 @@ export interface ContainerProps {
   tailwindClasses?: string;
   animationObject?: AnimationObject;
   style?: React.CSSProperties;
-  onClick?: () => any; 
+  onClick?: (() => any) | ((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => any); 
 }
