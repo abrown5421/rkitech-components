@@ -42,16 +42,20 @@ declare const Button: React$1.FC<ButtonProps>;
 
 type TailwindColor = 'red' | 'orange' | 'amber' | 'yellow' | 'lime' | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' | 'blue' | 'indigo' | 'violet' | 'purple' | 'fuchsia' | 'pink' | 'rose' | 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone';
 type TailwindIntensity = 50 | 100 | 200 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
+type ColorSuffix = {
+    color: TailwindColor;
+    intensity: TailwindIntensity;
+};
 type TailwindInteractionVariantObject = {
-    hover: string;
-    focus: string;
-    active: string;
-    visited: string;
-    disabled: string;
-    checked: string;
-    ndeterminate: string;
-    focusVisible: string;
-    focusWithin: string;
+    hover: ColorSuffix;
+    focus: ColorSuffix;
+    active: ColorSuffix;
+    visited: ColorSuffix;
+    disabled: ColorSuffix;
+    checked: ColorSuffix;
+    ndeterminate: ColorSuffix;
+    focusVisible: ColorSuffix;
+    focusWithin: ColorSuffix;
 };
 type TailwindColorOptions = {
     text?: TailwindInteractionVariantObject;
@@ -215,4 +219,4 @@ declare const Loader: React$1.FC<LoaderProps>;
 
 declare function tailwindToHex(colorName: string, intensity: number): string;
 
-export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, Radio, Select, Switch, TailwindColor, TailwindColorOptions, TailwindIntensity, TailwindInteractionVariantObject, Text, tailwindToHex };
+export { AnimationObject, Button, Checkbox, ColorSuffix, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, Radio, Select, Switch, TailwindColor, TailwindColorOptions, TailwindIntensity, TailwindInteractionVariantObject, Text, tailwindToHex };

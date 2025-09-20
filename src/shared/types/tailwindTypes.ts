@@ -17,16 +17,21 @@ export type TailwindIntensity =
   | 900
   | 950
 
+export type ColorSuffix = {
+  color: TailwindColor;
+  intensity: TailwindIntensity;
+}
+
 export type TailwindInteractionVariantObject = {
-  hover: string;
-  focus: string;
-  active: string;
-  visited: string;
-  disabled: string;
-  checked: string;
-  ndeterminate: string;
-  focusVisible: string;
-  focusWithin: string;
+  hover: ColorSuffix;
+  focus: ColorSuffix;
+  active: ColorSuffix;
+  visited: ColorSuffix;
+  disabled: ColorSuffix;
+  checked: ColorSuffix;
+  ndeterminate: ColorSuffix;
+  focusVisible: ColorSuffix;
+  focusWithin: ColorSuffix;
 }
 
 export type TailwindColorOptions = {
