@@ -48,15 +48,15 @@ type ColorSuffix = {
 };
 type TailwindInteractionVariantObject = {
     base: ColorSuffix;
-    hover: ColorSuffix;
-    focus: ColorSuffix;
-    active: ColorSuffix;
-    visited: ColorSuffix;
-    disabled: ColorSuffix;
-    checked: ColorSuffix;
-    ndeterminate: ColorSuffix;
-    focusVisible: ColorSuffix;
-    focusWithin: ColorSuffix;
+    hover?: ColorSuffix;
+    focus?: ColorSuffix;
+    active?: ColorSuffix;
+    visited?: ColorSuffix;
+    disabled?: ColorSuffix;
+    checked?: ColorSuffix;
+    ndeterminate?: ColorSuffix;
+    focusVisible?: ColorSuffix;
+    focusWithin?: ColorSuffix;
 };
 type TailwindColorOptions = {
     text?: TailwindInteractionVariantObject;

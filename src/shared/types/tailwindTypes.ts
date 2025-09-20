@@ -24,15 +24,15 @@ export type ColorSuffix = {
 
 export type TailwindInteractionVariantObject = {
   base: ColorSuffix; 
-  hover: ColorSuffix;
-  focus: ColorSuffix;
-  active: ColorSuffix;
-  visited: ColorSuffix;
-  disabled: ColorSuffix;
-  checked: ColorSuffix;
-  ndeterminate: ColorSuffix;
-  focusVisible: ColorSuffix;
-  focusWithin: ColorSuffix;
+  hover?: ColorSuffix;
+  focus?: ColorSuffix;
+  active?: ColorSuffix;
+  visited?: ColorSuffix;
+  disabled?: ColorSuffix;
+  checked?: ColorSuffix;
+  ndeterminate?: ColorSuffix;
+  focusVisible?: ColorSuffix;
+  focusWithin?: ColorSuffix;
 }
 
 export type TailwindColorOptions = {
