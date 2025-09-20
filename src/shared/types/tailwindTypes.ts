@@ -23,6 +23,7 @@ export type ColorSuffix = {
 }
 
 export type TailwindInteractionVariantObject = {
+  base: ColorSuffix; 
   hover: ColorSuffix;
   focus: ColorSuffix;
   active: ColorSuffix;
