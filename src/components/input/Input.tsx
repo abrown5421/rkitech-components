@@ -1,5 +1,44 @@
 import React, { useState, useRef, useEffect } from "react";
 import type { InputProps } from "./inputTypes";
+import { TailwindColorOptions, ColorSuffix } from "../../shared/types/tailwindTypes";
+
+const generateColorClass = (prefix: string, colorSuffix: ColorSuffix, variant?: string): string => {
+  const variantPrefix = variant ? `${variant}:` : '';
+  return `${variantPrefix}${prefix}-${colorSuffix.color}-${colorSuffix.intensity}`;
+};
+
+const useInputColorClasses = (colorOptions?: TailwindColorOptions, focused?: boolean, error?: boolean, disabled?: boolean) => {
+  if (!colorOptions) {
+    return {
+      focusRingColor: 'ring-blue-500',
+      focusBorderColor: 'border-blue-500',
+      focusLabelColor: 'text-blue-500',
+      borderClasses: '',
+      ringClasses: '',
+      textClasses: '',
+    };
+  }
+
+  const getStateColor = (variantObject: any) => {
+    if (disabled && variantObject.disabled) return variantObject.disabled;
+    if (error && variantObject.base) return { color: 'red', intensity: 500 }; 
+    if (focused && variantObject.focus) return variantObject.focus;
+    return variantObject.base;
+  };
+
+  const borderColor = colorOptions.border ? getStateColor(colorOptions.border) : null;
+  const ringColor = colorOptions.ring ? getStateColor(colorOptions.ring) : null;
+  const textColor = colorOptions.text ? getStateColor(colorOptions.text) : null;
+
+  return {
+    focusRingColor: ringColor ? generateColorClass('ring', ringColor) : 'ring-blue-500',
+    focusBorderColor: borderColor ? generateColorClass('border', borderColor) : 'border-blue-500',
+    focusLabelColor: textColor ? generateColorClass('text', textColor) : 'text-blue-500',
+    borderClasses: borderColor ? generateColorClass('border', borderColor) : '',
+    ringClasses: ringColor ? generateColorClass('ring', ringColor) : '',
+    textClasses: textColor ? generateColorClass('text', textColor) : '',
+  };
+};
 
 const Input: React.FC<InputProps> = ({
   label,
@@ -16,14 +55,22 @@ const Input: React.FC<InputProps> = ({
   onBlur,
   onChange,
   disabled = false,
-  color = "amber",
-  intensity = 500,
+  colorOptions,
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
   const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const hasValue = value !== undefined && value !== null && String(value).length > 0;
+  
+  const {
+    focusRingColor,
+    focusBorderColor,
+    focusLabelColor,
+    borderClasses,
+    ringClasses,
+    textClasses,
+  } = useInputColorClasses(colorOptions, focused, error, disabled);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -72,10 +119,6 @@ const Input: React.FC<InputProps> = ({
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
 
-  const focusRingColor = `ring-${color}-${intensity}`;
-  const focusBorderColor = `border-${color}-${intensity}`;
-  const focusLabelColor = `text-${color}-${intensity}`;
-
   const containerClasses = `
     relative w-full
     ${rows === "fill" ? "flex-grow" : ""}
@@ -92,7 +135,7 @@ const Input: React.FC<InputProps> = ({
         ? "border-red-500" 
         : focused 
           ? `${focusBorderColor} ring-2 ${focusRingColor}` 
-          : "border-gray-300"
+          : borderClasses || "border-gray-300"
     }
   `.trim();
 
@@ -104,7 +147,7 @@ const Input: React.FC<InputProps> = ({
     ${rows === "fill" ? "flex-grow" : ""}
     ${disabled 
       ? "cursor-not-allowed text-gray-400 bg-gray-100" 
-      : "text-gray-900 bg-transparent"
+      : `${textClasses || "text-gray-900"} bg-transparent`
     }
   `.trim();
 
@@ -112,7 +155,15 @@ const Input: React.FC<InputProps> = ({
     absolute transition-all duration-200 px-1 
     ${startAdornment ? "left-10" : "left-3"}
     ${focused || hasValue
-      ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}`
+      ? `text-xs -top-2.5 ${
+          disabled 
+            ? "text-gray-400" 
+            : error 
+              ? "text-red-500" 
+              : focused 
+                ? focusLabelColor 
+                : textClasses || "text-gray-950"
+        }`
       : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`
     }
   `.trim();

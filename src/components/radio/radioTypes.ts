@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import { AnimationObject } from "../../shared/types/animationTypes";
+import { TailwindColorOptions } from "../../shared/types/tailwindTypes";
 
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
   animationObject?: AnimationObject;
@@ -7,7 +8,6 @@ export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   label?: string;
   error?: boolean;
   helperText?: string;
-  color?: string;
-  intensity?: number;
+  colorOptions?: TailwindColorOptions;
   size?: 'sm' | 'md' | 'lg';
 }

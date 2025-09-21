@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import { AnimationObject } from "../../shared/types/animationTypes";
+import { TailwindColorOptions } from "../../shared/types/tailwindTypes";
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
   animationObject?: AnimationObject;
@@ -8,7 +9,6 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
   error?: boolean;
   helperText?: string;
   indeterminate?: boolean;
-  color?: string;
-  intensity?: number;
+  colorOptions: TailwindColorOptions;
   size?: 'sm' | 'md' | 'lg';
 }

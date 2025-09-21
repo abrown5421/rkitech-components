@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import type { RadioProps } from "./radioTypes";
+import { buildColorOptions } from "../../shared/utils/buildColorOptions";
 
 const Radio: React.FC<RadioProps> = ({
   label,
@@ -12,8 +13,7 @@ const Radio: React.FC<RadioProps> = ({
   onBlur,
   onChange,
   disabled = false,
-  color = "amber",
-  intensity = 500,
+  colorOptions,
   size = "md",
   ...rest
 }) => {
@@ -21,6 +21,13 @@ const Radio: React.FC<RadioProps> = ({
   const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const colorClasses = buildColorOptions(colorOptions, {
+    focused,
+    error,
+    disabled,
+    checked
+  });
 
   useEffect(() => {
     if (containerRef.current) {
@@ -76,10 +83,6 @@ const Radio: React.FC<RadioProps> = ({
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
 
-  const focusRingColor = `ring-${color}-${intensity}`;
-  const checkedColor = `bg-${color}-${intensity}`;
-  const checkedBorderColor = `border-${color}-${intensity}`;
-
   const sizeConfig = {
     sm: { radio: "w-4 h-4", label: "text-sm", gap: "gap-2" },
     md: { radio: "w-5 h-5", label: "text-base", gap: "gap-3" },
@@ -101,10 +104,10 @@ const Radio: React.FC<RadioProps> = ({
       : error 
         ? "border-red-500" 
         : checked
-          ? `${checkedBorderColor} ${checkedColor}`
+          ? `${colorClasses.checkedBorderClasses} ${colorClasses.checkedBgClasses}`
           : focused 
-            ? `border-gray-400 ring-2 ${focusRingColor}` 
-            : "border-gray-300 hover:border-gray-400"
+            ? `border-gray-400 ring-2 ${colorClasses.focusRingClasses}` 
+            : `${colorClasses.borderClasses} hover:border-gray-400`
     }
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();
@@ -115,7 +118,7 @@ const Radio: React.FC<RadioProps> = ({
       ? "text-gray-400 cursor-not-allowed" 
       : error 
         ? "text-red-500" 
-        : "text-gray-900"
+        : colorClasses.textClasses
     }
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();

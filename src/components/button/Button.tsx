@@ -5,7 +5,7 @@ import { shredColorOptions } from "../../shared/utils/shredColorOptions";
 const Button: React.FC<ButtonProps> = ({
   children,
   tailwindClasses = "",
-  color,
+  colorOptions,
   animationObject,
   style,
   onClick,
@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
           : animationObject.exitAnimation
       }`
     : "";
-  const colorString = shredColorOptions(color)
+  const colorString = shredColorOptions(colorOptions)
 
   return (
     <button

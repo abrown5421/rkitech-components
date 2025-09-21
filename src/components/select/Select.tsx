@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, ReactNode } from "react";
 import { SelectProps } from "./selectTypes";
+import { buildColorOptions } from "../../shared/utils/buildColorOptions";
 
 const Select: React.FC<SelectProps> = ({
   label,
@@ -14,8 +15,7 @@ const Select: React.FC<SelectProps> = ({
   onBlur,
   onChange,
   disabled = false,
-  color = "amber",
-  intensity = 500,
+  colorOptions,
   placeholder,
   children,
   ...rest
@@ -24,6 +24,12 @@ const Select: React.FC<SelectProps> = ({
   const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const hasValue = value !== undefined && value !== null && String(value).length > 0;
+
+  const colorClasses = buildColorOptions(colorOptions, {
+    focused,
+    error,
+    disabled
+  });
 
   useEffect(() => {
     if (containerRef.current) {
@@ -72,10 +78,6 @@ const Select: React.FC<SelectProps> = ({
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
 
-  const focusRingColor = `ring-${color}-${intensity}`;
-  const focusBorderColor = `border-${color}-${intensity}`;
-  const focusLabelColor = `text-${color}-${intensity}`;
-
   const containerClasses = `
     relative w-full
     ${tailwindClasses}
@@ -89,8 +91,8 @@ const Select: React.FC<SelectProps> = ({
       : error 
         ? "border-red-500" 
         : focused 
-          ? `${focusBorderColor} ring-2 ${focusRingColor}` 
-          : "border-gray-300"
+          ? `${colorClasses.focusBorderClasses} ring-2 ${colorClasses.focusRingClasses}` 
+          : colorClasses.borderClasses
     }
   `.trim();
 
@@ -100,7 +102,7 @@ const Select: React.FC<SelectProps> = ({
     ${endAdornment ? "pr-10" : "pr-8"}
     ${disabled 
       ? "cursor-not-allowed text-gray-400 bg-gray-100" 
-      : "text-gray-900 bg-transparent"
+      : `${colorClasses.textClasses} bg-transparent`
     }
   `.trim();
 
@@ -108,14 +110,21 @@ const Select: React.FC<SelectProps> = ({
     absolute transition-all duration-200 px-1 pointer-events-none
     ${startAdornment ? "left-10" : "left-3"}
     ${focused || hasValue
-      ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}`
+      ? `text-xs -top-2.5 ${
+          disabled 
+            ? "text-gray-400" 
+            : error 
+              ? "text-red-500" 
+              : focused 
+                ? colorClasses.focusTextClasses 
+                : "text-gray-950"
+        }`
       : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`
     }
   `.trim();
 
   const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
 
-  // Default dropdown arrow
   const defaultDropdownArrow = (
     <svg 
       className="w-4 h-4" 

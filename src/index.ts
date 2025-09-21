@@ -19,3 +19,4 @@ export type { TailwindColor, TailwindIntensity, ColorSuffix, TailwindInteraction
 
 // utils
 export { tailwindToHex } from './shared/utils/tailwindToHex';
+export { shredColorOptions } from './shared/utils/shredColorOptions';

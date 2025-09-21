@@ -4,7 +4,7 @@ import { TailwindColorOptions } from "../../shared/types/tailwindTypes";
 export interface TextProps {
     text: string;
     tailwindClasses?: string;
-    color?: TailwindColorOptions;
+    colorOptions?: TailwindColorOptions;
     animationObject?: AnimationObject;
     style?: React.CSSProperties;
 }

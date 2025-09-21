@@ -5,7 +5,7 @@ import { TailwindColorOptions } from "../../shared/types/tailwindTypes";
 export interface ButtonProps {
   children: ReactNode;
   tailwindClasses?: string;
-  color?: TailwindColorOptions;
+  colorOptions?: TailwindColorOptions;
   animationObject?: AnimationObject;
   style?: React.CSSProperties;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;

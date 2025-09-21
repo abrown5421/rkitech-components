@@ -6,7 +6,7 @@ const ListItem: React.FC<ListItemProps> = ({
   children,
   iconBullet,
   tailwindClasses = "",
-  color,
+  colorOptions,
   animationObject,
   onClick,
   style,
@@ -18,12 +18,12 @@ const ListItem: React.FC<ListItemProps> = ({
           : animationObject.exitAnimation
       }`
     : "";
-  const colorString = shredColorOptions(color)
+  const colorString = shredColorOptions(colorOptions)
 
   if (iconBullet) {
     return (
       <li
-        className={`component-root flex items-center ${tailwindClasses} ${animationClasses}`}
+        className={`component-root flex items-center ${tailwindClasses} ${animationClasses} ${colorString}`}
         style={{
             animationDelay: `${animationObject?.delay ?? 0}s`,
             ...style,

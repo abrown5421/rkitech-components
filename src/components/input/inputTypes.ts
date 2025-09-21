@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, ReactNode } from "react";
 import { AnimationObject } from "../../shared/types/animationTypes";
+import { TailwindColor, TailwindColorOptions } from "../../shared/types/tailwindTypes";
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
   animationObject?: AnimationObject;
@@ -11,6 +12,5 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   endAdornment?: ReactNode;
   multiline?: boolean;
   rows?: number | 'fill';
-  color?: string;
-  intensity?: number;
+  colorOptions?: TailwindColorOptions;
 }

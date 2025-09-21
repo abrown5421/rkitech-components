@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import type { SwitchProps } from "./switchTypes";
+import { buildColorOptions } from "../../shared/utils/buildColorOptions";
 
 const Switch: React.FC<SwitchProps> = ({
   label,
@@ -12,8 +13,7 @@ const Switch: React.FC<SwitchProps> = ({
   onBlur,
   onChange,
   disabled = false,
-  color = "amber",
-  intensity = 500,
+  colorOptions,
   size = "md",
   ...rest
 }) => {
@@ -21,6 +21,13 @@ const Switch: React.FC<SwitchProps> = ({
   const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const colorClasses = buildColorOptions(colorOptions, {
+    focused,
+    error,
+    disabled,
+    checked
+  });
 
   useEffect(() => {
     if (containerRef.current) {
@@ -76,9 +83,6 @@ const Switch: React.FC<SwitchProps> = ({
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
 
-  const focusRingColor = `ring-${color}-${intensity}`;
-  const checkedColor = `bg-${color}-${intensity}`;
-
   const sizeConfig = {
     sm: { 
       track: "w-8 h-5", 
@@ -118,10 +122,10 @@ const Switch: React.FC<SwitchProps> = ({
       : error 
         ? "border-red-500 bg-red-100" 
         : checked
-          ? `${checkedColor} border-transparent`
+          ? `${colorClasses.checkedBgClasses} border-transparent`
           : focused 
-            ? `bg-gray-200 border-gray-400 ring-2 ${focusRingColor}` 
-            : "bg-gray-200 border-gray-300 hover:bg-gray-300"
+            ? `bg-gray-200 border-gray-400 ring-2 ${colorClasses.focusRingClasses}` 
+            : `bg-gray-200 ${colorClasses.borderClasses} hover:bg-gray-300`
     }
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();
@@ -138,7 +142,7 @@ const Switch: React.FC<SwitchProps> = ({
       ? "text-gray-400 cursor-not-allowed" 
       : error 
         ? "text-red-500" 
-        : "text-gray-900"
+        : colorClasses.textClasses
     }
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();

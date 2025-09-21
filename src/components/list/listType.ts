@@ -20,7 +20,7 @@ export interface ListItemProps {
   children: ReactNode;
   iconBullet?: ReactNode; 
   tailwindClasses?: string;
-  color?: TailwindColorOptions;
+  colorOptions?: TailwindColorOptions;
   animationObject?: AnimationObject;
   style?: React.CSSProperties;
   onClick?: React.MouseEventHandler<HTMLLIElement>;

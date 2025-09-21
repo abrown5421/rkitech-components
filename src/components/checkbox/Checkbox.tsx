@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import type { CheckboxProps } from "./checkboxTypes";
+import { buildColorOptions } from "../../shared/utils/buildColorOptions";
 
 const Checkbox: React.FC<CheckboxProps> = ({
   label,
@@ -13,8 +14,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   onBlur,
   onChange,
   disabled = false,
-  color = "amber",
-  intensity = 500,
+  colorOptions,
   size = "md",
   ...rest
 }) => {
@@ -22,6 +22,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const [backgroundStyle, setBackgroundStyle] = useState<React.CSSProperties>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const colorClasses = buildColorOptions(colorOptions, {
+    focused,
+    error,
+    disabled,
+    checked,
+    indeterminate
+  });
 
   useEffect(() => {
     if (inputRef.current) {
@@ -83,10 +91,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
 
-  const focusRingColor = `ring-${color}-${intensity}`;
-  const checkedColor = `bg-${color}-${intensity}`;
-  const checkedBorderColor = `border-${color}-${intensity}`;
-
   const sizeConfig = {
     sm: { checkbox: "w-4 h-4", label: "text-sm", gap: "gap-2", icon: "w-2.5 h-2.5" },
     md: { checkbox: "w-5 h-5", label: "text-base", gap: "gap-3", icon: "w-3 h-3" },
@@ -108,10 +112,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
       : error 
         ? "border-red-500" 
         : checked || indeterminate
-          ? `${checkedBorderColor} ${checkedColor}`
+          ? `${colorClasses.checkedBorderClasses} ${colorClasses.checkedBgClasses}`
           : focused 
-            ? `border-gray-400 ring-2 ${focusRingColor}` 
-            : "border-gray-300 hover:border-gray-400"
+            ? `border-gray-400 ring-2 ${colorClasses.focusRingClasses}` 
+            : `${colorClasses.borderClasses} hover:border-gray-400`
     }
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();
@@ -122,7 +126,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       ? "text-gray-400 cursor-not-allowed" 
       : error 
         ? "text-red-500" 
-        : "text-gray-900"
+        : colorClasses.textClasses
     }
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();

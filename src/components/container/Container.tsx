@@ -5,7 +5,7 @@ import { shredColorOptions } from '../../shared/utils/shredColorOptions';
 const Container: React.FC<ContainerProps> = ({
   children,
   tailwindClasses = '',
-  color,
+  colorOptions,
   animationObject,
   style,
   onClick, 
@@ -13,7 +13,7 @@ const Container: React.FC<ContainerProps> = ({
   const animationClasses = animationObject
     ? `animate__animated ${animationObject.isEntering ? animationObject.entranceAnimation : animationObject.exitAnimation}`
     : '';
-    const colorString = shredColorOptions(color)
+    const colorString = shredColorOptions(colorOptions)
 
   return (
     <div
