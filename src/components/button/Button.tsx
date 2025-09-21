@@ -1,9 +1,11 @@
 import React from "react";
 import type { ButtonProps } from "./buttonTypes";
+import { shredColorOptions } from "../../shared/utils/shredColorOptions";
 
 const Button: React.FC<ButtonProps> = ({
   children,
   tailwindClasses = "",
+  color,
   animationObject,
   style,
   onClick,
@@ -17,10 +19,11 @@ const Button: React.FC<ButtonProps> = ({
           : animationObject.exitAnimation
       }`
     : "";
+  const colorString = shredColorOptions(color)
 
   return (
     <button
-      className={`component-root inline-flex items-center gap-2 ${tailwindClasses} ${animationClasses}`}
+      className={`component-root inline-flex items-center gap-2 ${tailwindClasses} ${animationClasses} ${colorString}`}
       style={{
         animationDelay: `${animationObject?.delay ?? 0}s`,
         ...style, 

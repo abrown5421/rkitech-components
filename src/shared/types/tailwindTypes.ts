@@ -30,7 +30,7 @@ export type TailwindInteractionVariantObject = {
   visited?: ColorSuffix;
   disabled?: ColorSuffix;
   checked?: ColorSuffix;
-  ndeterminate?: ColorSuffix;
+  indeterminate?: ColorSuffix;
   focusVisible?: ColorSuffix;
   focusWithin?: ColorSuffix;
 }

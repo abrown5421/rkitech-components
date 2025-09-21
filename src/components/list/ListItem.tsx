@@ -1,10 +1,12 @@
 import React from "react";
 import { ListItemProps } from "./listType";
+import { shredColorOptions } from "../../shared/utils/shredColorOptions";
 
 const ListItem: React.FC<ListItemProps> = ({
   children,
   iconBullet,
   tailwindClasses = "",
+  color,
   animationObject,
   onClick,
   style,
@@ -16,6 +18,7 @@ const ListItem: React.FC<ListItemProps> = ({
           : animationObject.exitAnimation
       }`
     : "";
+  const colorString = shredColorOptions(color)
 
   if (iconBullet) {
     return (
