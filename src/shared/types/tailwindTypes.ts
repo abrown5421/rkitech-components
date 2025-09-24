@@ -1,8 +1,9 @@
 export type TailwindColor =
   | 'red' | 'orange' | 'amber' | 'yellow' | 'lime' | 'green' | 'emerald'
   | 'teal' | 'cyan' | 'sky' | 'blue' | 'indigo' | 'violet' | 'purple'
-  | 'fuchsia' | 'pink' | 'rose' | 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
-  | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'black' | 'white';
+  | 'fuchsia' | 'pink' | 'rose' | 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone';
+  
+export type ThemeOptions = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'black' | 'white'
 
 export type TailwindIntensity = 
   | 50
