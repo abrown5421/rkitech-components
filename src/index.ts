@@ -15,7 +15,7 @@ export { default as Loader } from './components/loader/Loader';
 
 // types
 export type { EntranceAnimation, ExitAnimation, AnimationObject } from './shared/types/animationTypes';
-export type { TailwindColor, TailwindIntensity } from './shared/types/tailwindTypes';
+export type { TailwindColor, TailwindIntensity, ThemeOptions } from './shared/types/tailwindTypes';
 
 // utils
 export { tailwindToHex } from './shared/utils/tailwindToHex';
