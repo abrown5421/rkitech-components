@@ -2,10 +2,10 @@ declare module "trianglify" {
   interface TrianglifyOptions {
     width: number;
     height: number;
-    cell_size?: number;
+    cellSize?: number;
     variance?: number;
-    x_colors?: string[] | "random";
-    y_colors?: string[] | "match";
+    xColors?: string[] | "random";
+    yColors?: string[] | "match";
   }
 
   interface Pattern {
