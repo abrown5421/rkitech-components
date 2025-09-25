@@ -1,22 +1,17 @@
-import React, { useMemo } from "react";
-import Trianglify from "trianglify";
+import React from "react";
+import { Trianglify } from "react-trianglify";
 import { PlaceholderImageProps } from "./placeholderImageTypes";
 import { tailwindToHex } from "../../shared/utils/tailwindToHex";
 
 const normalizeSize = (value: number | string): string => {
-  if (typeof value === "number") {
-    return `${value}px`;
-  }
-  return value; 
+  return typeof value === "number" ? `${value}px` : value;
 };
 
-const clampCellSize = (value: number): number => {
-  return Math.min(Math.max(value, 10), 100);
-};
+const clampCellSize = (value: number): number =>
+  Math.min(Math.max(value, 10), 100);
 
-const clampVariance = (value: number): number => {
-  return Math.min(Math.max(value, 0.1), 1);
-};
+const clampVariance = (value: number): number =>
+  Math.min(Math.max(value, 0.1), 1);
 
 const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
   width,
@@ -24,37 +19,41 @@ const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
   placeholder,
   image,
 }) => {
-  const trianglifyDataUrl = useMemo(() => {
-    if (image?.src) return null;
-
-    const { cellSize, variance, xColors, yColors } = placeholder;
-
-    const xTailwindToHex = xColors.map((c) =>
-      tailwindToHex(c.color, c.intensity)
+  if (image?.src) {
+    return (
+      <img
+        src={image.src}
+        alt={image.alt || "Placeholder image"}
+        width={undefined}
+        height={undefined}
+        onClick={image.onClick}
+        className={image.tailwindClasses}
+        style={{
+          width: normalizeSize(image.width ?? width),
+          height: normalizeSize(image.height ?? height),
+          ...image.style,
+        }}
+      />
     );
-    const yTailwindToHex = yColors.map((c) =>
-      tailwindToHex(c.color, c.intensity)
-    );
+  }
 
-    const pattern = Trianglify({
-        width: typeof width === "number" ? width : parseInt(width, 10),
-        height: typeof height === "number" ? height : parseInt(height, 10),
-        cellSize: clampCellSize(cellSize),
-        variance: clampVariance(variance),
-        xColors: xTailwindToHex, 
-        yColors: yTailwindToHex, 
-    });
+  const { cellSize, variance, xColors, yColors } = placeholder;
 
-    return pattern.toCanvas().toDataURL();
-  }, [width, height, placeholder, image?.src]);
+  const xTailwindToHex = xColors.map((c) =>
+    tailwindToHex(c.color, c.intensity)
+  );
+  const yTailwindToHex = yColors.map((c) =>
+    tailwindToHex(c.color, c.intensity)
+  );
 
   return (
-    <img
-      src={image?.src || trianglifyDataUrl || ""}
-      alt={image?.alt || "Placeholder image"}
-      width={undefined}
-      height={undefined}
-      onClick={image?.onClick}
+    <Trianglify
+      width={typeof width === "number" ? width : parseInt(width, 10)}
+      height={typeof height === "number" ? height : parseInt(height, 10)}
+      cellSize={clampCellSize(cellSize)}
+      variance={clampVariance(variance)}
+      xColors={xTailwindToHex}
+      yColors={yTailwindToHex}
       className={image?.tailwindClasses}
       style={{
         width: normalizeSize(image?.width ?? width),
