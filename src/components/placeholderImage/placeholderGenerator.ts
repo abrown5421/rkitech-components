@@ -1,5 +1,5 @@
-import { TailwindColor, TailwindIntensity } from "../../shared/types/tailwindTypes";
-import { PlaceholderConfig, TailwindColorObject } from "./placeholderImageTypes";
+import { TailwindColor, TailwindColorObject, TailwindIntensity } from "../../shared/types/tailwindTypes";
+import { PlaceholderConfig } from "./placeholderImageTypes";
 
 const COLORS: TailwindColor[] = [
   "red", "orange", "amber", "yellow", "lime", "green", "emerald",
