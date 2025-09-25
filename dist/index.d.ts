@@ -199,6 +199,10 @@ declare const PlaceholderImage: React$1.FC<PlaceholderImageProps>;
 
 declare function tailwindToHex(colorName: string, intensity: number): string;
 
+<<<<<<< HEAD
 declare const placeholderGenerator: () => PlaceholderConfig;
 
 export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, PlaceholderImage, Radio, Select, Switch, TailwindColor, TailwindIntensity, Text, ThemeOptions, placeholderGenerator, tailwindToHex };
+=======
+export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, PlaceholderImage, Radio, Select, Switch, TailwindColor, TailwindIntensity, Text, ThemeOptions, tailwindToHex };
+>>>>>>> main
