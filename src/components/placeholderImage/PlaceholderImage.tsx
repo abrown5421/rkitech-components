@@ -37,12 +37,12 @@ const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
     );
 
     const pattern = Trianglify({
-      width: typeof width === "number" ? width : parseInt(width, 10),
-      height: typeof height === "number" ? height : parseInt(height, 10),
-      cell_size: clampCellSize(cellSize),
-      variance: clampVariance(variance),
-      x_colors: xTailwindToHex,
-      y_colors: yTailwindToHex,
+        width: typeof width === "number" ? width : parseInt(width, 10),
+        height: typeof height === "number" ? height : parseInt(height, 10),
+        cellSize: clampCellSize(cellSize),
+        variance: clampVariance(variance),
+        xColors: xTailwindToHex, 
+        yColors: yTailwindToHex, 
     });
 
     return pattern.toCanvas().toDataURL();
