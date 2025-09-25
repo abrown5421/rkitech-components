@@ -41227,10 +41227,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 
-<<<<<<< HEAD
 export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Loader_default as Loader, PlaceholderImage_default as PlaceholderImage, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text, placeholderGenerator, tailwindToHex };
-=======
-export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Loader_default as Loader, PlaceholderImage_default as PlaceholderImage, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text, tailwindToHex };
->>>>>>> main
 //# sourceMappingURL=out.js.map
 //# sourceMappingURL=index.mjs.map
