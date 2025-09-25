@@ -43,6 +43,10 @@ declare const Button: React$1.FC<ButtonProps>;
 type TailwindColor = 'red' | 'orange' | 'amber' | 'yellow' | 'lime' | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' | 'blue' | 'indigo' | 'violet' | 'purple' | 'fuchsia' | 'pink' | 'rose' | 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone';
 type ThemeOptions = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'black' | 'white';
 type TailwindIntensity = 50 | 100 | 200 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
+type TailwindColorObject = {
+    color: TailwindColor;
+    intensity: TailwindIntensity;
+};
 
 interface IconProps {
     iconName: string;
@@ -178,10 +182,6 @@ interface LoaderProps {
 
 declare const Loader: React$1.FC<LoaderProps>;
 
-type TailwindColorObject = {
-    color: TailwindColor;
-    intensity: TailwindIntensity;
-};
 type PlaceholderConfig = {
     cellSize: number;
     variance: number;
@@ -201,4 +201,4 @@ declare function tailwindToHex(colorName: string, intensity: number): string;
 
 declare const placeholderGenerator: () => PlaceholderConfig;
 
-export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, PlaceholderImage, Radio, Select, Switch, TailwindColor, TailwindIntensity, Text, ThemeOptions, placeholderGenerator, tailwindToHex };
+export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, PlaceholderConfig, PlaceholderImage, PlaceholderImageProps, Radio, Select, Switch, TailwindColor, TailwindColorObject, TailwindIntensity, Text, ThemeOptions, placeholderGenerator, tailwindToHex };
