@@ -4,8 +4,8 @@ declare module "trianglify" {
     height: number;
     cell_size?: number;
     variance?: number;
-    x_colors?: string | "random";
-    y_colors?: string | "match";
+    x_colors?: string[] | "random";
+    y_colors?: string[] | "match";
   }
 
   interface Pattern {

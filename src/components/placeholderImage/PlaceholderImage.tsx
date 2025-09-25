@@ -1,38 +1,66 @@
 import React, { useMemo } from "react";
 import Trianglify from "trianglify";
 import { PlaceholderImageProps } from "./placeholderImageTypes";
+import { tailwindToHex } from "../../shared/utils/tailwindToHex";
+
+const normalizeSize = (value: number | string): string => {
+  if (typeof value === "number") {
+    return `${value}px`;
+  }
+  return value; 
+};
+
+const clampCellSize = (value: number): number => {
+  return Math.min(Math.max(value, 10), 100);
+};
+
+const clampVariance = (value: number): number => {
+  return Math.min(Math.max(value, 0.1), 1);
+};
 
 const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
   width,
   height,
-  cellSize,
-  variance,
-  xColors,
-  yColors,
+  placeholder,
   image,
 }) => {
   const trianglifyDataUrl = useMemo(() => {
     if (image?.src) return null;
+
+    const { cellSize, variance, xColors, yColors } = placeholder;
+
+    const xTailwindToHex = xColors.map((c) =>
+      tailwindToHex(c.color, c.intensity)
+    );
+    const yTailwindToHex = yColors.map((c) =>
+      tailwindToHex(c.color, c.intensity)
+    );
+
     const pattern = Trianglify({
-      width,
-      height,
-      cell_size: cellSize,
-      variance,
-      x_colors: xColors,
-      y_colors: yColors,
+      width: typeof width === "number" ? width : parseInt(width, 10),
+      height: typeof height === "number" ? height : parseInt(height, 10),
+      cell_size: clampCellSize(cellSize),
+      variance: clampVariance(variance),
+      x_colors: xTailwindToHex,
+      y_colors: yTailwindToHex,
     });
+
     return pattern.toCanvas().toDataURL();
-  }, [width, height, cellSize, variance, xColors, yColors, image?.src]);
+  }, [width, height, placeholder, image?.src]);
 
   return (
     <img
       src={image?.src || trianglifyDataUrl || ""}
       alt={image?.alt || "Placeholder image"}
-      width={image?.width || width}
-      height={image?.height || height}
+      width={undefined}
+      height={undefined}
       onClick={image?.onClick}
       className={image?.tailwindClasses}
-      style={image?.style}
+      style={{
+        width: normalizeSize(image?.width ?? width),
+        height: normalizeSize(image?.height ?? height),
+        ...image?.style,
+      }}
     />
   );
 };

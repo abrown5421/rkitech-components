@@ -20,3 +20,4 @@ export type { TailwindColor, TailwindIntensity, ThemeOptions } from './shared/ty
 
 // utils
 export { tailwindToHex } from './shared/utils/tailwindToHex';
+export { placeholderGenerator } from './components/placeholderImage/placeholderGenerator';
