@@ -178,6 +178,27 @@ interface LoaderProps {
 
 declare const Loader: React$1.FC<LoaderProps>;
 
+type TailwindColorObject = {
+    color: TailwindColor;
+    intensity: TailwindIntensity;
+};
+type PlaceholderConfig = {
+    cellSize: number;
+    variance: number;
+    xColors: TailwindColorObject[];
+    yColors: TailwindColorObject[];
+};
+interface PlaceholderImageProps {
+    width: number | string;
+    height: number | string;
+    placeholder: PlaceholderConfig;
+    image?: ImageProps;
+}
+
+declare const PlaceholderImage: React$1.FC<PlaceholderImageProps>;
+
 declare function tailwindToHex(colorName: string, intensity: number): string;
 
-export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, Radio, Select, Switch, TailwindColor, TailwindIntensity, Text, ThemeOptions, tailwindToHex };
+declare const placeholderGenerator: () => PlaceholderConfig;
+
+export { AnimationObject, Button, Checkbox, Container, EntranceAnimation, ExitAnimation, Icon, Image, Input, List, ListItem, Loader, PlaceholderImage, Radio, Select, Switch, TailwindColor, TailwindIntensity, Text, ThemeOptions, placeholderGenerator, tailwindToHex };

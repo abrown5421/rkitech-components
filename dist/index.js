@@ -2,6 +2,11 @@
 
 var jsxRuntime = require('react/jsx-runtime');
 var react = require('react');
+var Trianglify = require('trianglify');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var Trianglify__default = /*#__PURE__*/_interopDefault(Trianglify);
 
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -27998,6 +28003,105 @@ var Loader2 = ({
   ] });
 };
 var Loader_default = Loader2;
+var normalizeSize = (value) => {
+  if (typeof value === "number") {
+    return `${value}px`;
+  }
+  return value;
+};
+var clampCellSize = (value) => {
+  return Math.min(Math.max(value, 10), 100);
+};
+var clampVariance = (value) => {
+  return Math.min(Math.max(value, 0.1), 1);
+};
+var PlaceholderImage = ({
+  width,
+  height,
+  placeholder,
+  image
+}) => {
+  const trianglifyDataUrl = react.useMemo(() => {
+    if (image?.src)
+      return null;
+    const { cellSize, variance, xColors, yColors } = placeholder;
+    const xTailwindToHex = xColors.map(
+      (c) => tailwindToHex(c.color, c.intensity)
+    );
+    const yTailwindToHex = yColors.map(
+      (c) => tailwindToHex(c.color, c.intensity)
+    );
+    const pattern = Trianglify__default.default({
+      width: typeof width === "number" ? width : parseInt(width, 10),
+      height: typeof height === "number" ? height : parseInt(height, 10),
+      cell_size: clampCellSize(cellSize),
+      variance: clampVariance(variance),
+      x_colors: xTailwindToHex,
+      y_colors: yTailwindToHex
+    });
+    return pattern.toCanvas().toDataURL();
+  }, [width, height, placeholder, image?.src]);
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "img",
+    {
+      src: image?.src || trianglifyDataUrl || "",
+      alt: image?.alt || "Placeholder image",
+      width: void 0,
+      height: void 0,
+      onClick: image?.onClick,
+      className: image?.tailwindClasses,
+      style: {
+        width: normalizeSize(image?.width ?? width),
+        height: normalizeSize(image?.height ?? height),
+        ...image?.style
+      }
+    }
+  );
+};
+var PlaceholderImage_default = PlaceholderImage;
+
+// src/components/placeholderImage/placeholderGenerator.ts
+var COLORS = [
+  "red",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+  "pink",
+  "rose"
+];
+var INTENSITIES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+var randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+var randomFloat = (min, max, decimals = 2) => {
+  const str = (Math.random() * (max - min) + min).toFixed(decimals);
+  return parseFloat(str);
+};
+var randomColorObject = () => ({
+  color: COLORS[randomInt(0, COLORS.length - 1)],
+  intensity: INTENSITIES[randomInt(0, INTENSITIES.length - 1)]
+});
+var placeholderGenerator = () => {
+  const numXColors = randomInt(2, 5);
+  const numYColors = randomInt(2, 5);
+  const xColors = Array.from({ length: numXColors }, randomColorObject);
+  const yColors = Array.from({ length: numYColors }, randomColorObject);
+  return {
+    cellSize: randomInt(10, 100),
+    variance: randomFloat(0.1, 1, 2),
+    xColors,
+    yColors
+  };
+};
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -41138,10 +41242,12 @@ exports.Input = Input_default;
 exports.List = List_default;
 exports.ListItem = ListItem_default;
 exports.Loader = Loader_default;
+exports.PlaceholderImage = PlaceholderImage_default;
 exports.Radio = Radio_default;
 exports.Select = Select_default;
 exports.Switch = Switch_default;
 exports.Text = Text_default;
+exports.placeholderGenerator = placeholderGenerator;
 exports.tailwindToHex = tailwindToHex;
 //# sourceMappingURL=out.js.map
 //# sourceMappingURL=index.js.map
