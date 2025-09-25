@@ -1,6 +1,6 @@
 {
   "name": "rkitech-components",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "description": "rkitech-components — a small React UI component library",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

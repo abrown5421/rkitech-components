@@ -1,5 +1,6 @@
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
-import { forwardRef, createElement, useState, useRef, useEffect } from 'react';
+import { forwardRef, createElement, useState, useRef, useEffect, useMemo } from 'react';
+import Trianglify from 'trianglify';
 
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -27996,6 +27997,42 @@ var Loader2 = ({
   ] });
 };
 var Loader_default = Loader2;
+var PlaceholderImage = ({
+  width,
+  height,
+  cellSize,
+  variance,
+  xColors,
+  yColors,
+  image
+}) => {
+  const trianglifyDataUrl = useMemo(() => {
+    if (image?.src)
+      return null;
+    const pattern = Trianglify({
+      width,
+      height,
+      cell_size: cellSize,
+      variance,
+      x_colors: xColors,
+      y_colors: yColors
+    });
+    return pattern.toCanvas().toDataURL();
+  }, [width, height, cellSize, variance, xColors, yColors, image?.src]);
+  return /* @__PURE__ */ jsx(
+    "img",
+    {
+      src: image?.src || trianglifyDataUrl || "",
+      alt: image?.alt || "Placeholder image",
+      width: image?.width || width,
+      height: image?.height || height,
+      onClick: image?.onClick,
+      className: image?.tailwindClasses,
+      style: image?.style
+    }
+  );
+};
+var PlaceholderImage_default = PlaceholderImage;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -41127,6 +41164,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 
-export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Loader_default as Loader, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text, tailwindToHex };
+export { Button_default as Button, Checkbox_default as Checkbox, Container_default as Container, Icon_default as Icon, Image_default as Image, Input_default as Input, List_default as List, ListItem_default as ListItem, Loader_default as Loader, PlaceholderImage_default as PlaceholderImage, Radio_default as Radio, Select_default as Select, Switch_default as Switch, Text_default as Text, tailwindToHex };
 //# sourceMappingURL=out.js.map
 //# sourceMappingURL=index.mjs.map

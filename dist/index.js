@@ -2,6 +2,11 @@
 
 var jsxRuntime = require('react/jsx-runtime');
 var react = require('react');
+var Trianglify = require('trianglify');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var Trianglify__default = /*#__PURE__*/_interopDefault(Trianglify);
 
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -27998,6 +28003,42 @@ var Loader2 = ({
   ] });
 };
 var Loader_default = Loader2;
+var PlaceholderImage = ({
+  width,
+  height,
+  cellSize,
+  variance,
+  xColors,
+  yColors,
+  image
+}) => {
+  const trianglifyDataUrl = react.useMemo(() => {
+    if (image?.src)
+      return null;
+    const pattern = Trianglify__default.default({
+      width,
+      height,
+      cell_size: cellSize,
+      variance,
+      x_colors: xColors,
+      y_colors: yColors
+    });
+    return pattern.toCanvas().toDataURL();
+  }, [width, height, cellSize, variance, xColors, yColors, image?.src]);
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "img",
+    {
+      src: image?.src || trianglifyDataUrl || "",
+      alt: image?.alt || "Placeholder image",
+      width: image?.width || width,
+      height: image?.height || height,
+      onClick: image?.onClick,
+      className: image?.tailwindClasses,
+      style: image?.style
+    }
+  );
+};
+var PlaceholderImage_default = PlaceholderImage;
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -41138,6 +41179,7 @@ exports.Input = Input_default;
 exports.List = List_default;
 exports.ListItem = ListItem_default;
 exports.Loader = Loader_default;
+exports.PlaceholderImage = PlaceholderImage_default;
 exports.Radio = Radio_default;
 exports.Select = Select_default;
 exports.Switch = Switch_default;
