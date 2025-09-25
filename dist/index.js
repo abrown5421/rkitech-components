@@ -28034,10 +28034,10 @@ var PlaceholderImage = ({
     const pattern = Trianglify__default.default({
       width: typeof width === "number" ? width : parseInt(width, 10),
       height: typeof height === "number" ? height : parseInt(height, 10),
-      cell_size: clampCellSize(cellSize),
+      cellSize: clampCellSize(cellSize),
       variance: clampVariance(variance),
-      x_colors: xTailwindToHex,
-      y_colors: yTailwindToHex
+      xColors: xTailwindToHex,
+      yColors: yTailwindToHex
     });
     return pattern.toCanvas().toDataURL();
   }, [width, height, placeholder, image?.src]);
