@@ -18,3 +18,9 @@ export type TailwindIntensity =
   | 800
   | 900
   | 950
+
+  
+export type TailwindColorObject = {
+    color: TailwindColor,
+    intensity: TailwindIntensity
+}

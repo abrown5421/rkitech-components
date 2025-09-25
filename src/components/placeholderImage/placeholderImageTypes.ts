@@ -1,10 +1,5 @@
-import { TailwindColor, TailwindIntensity } from "../../shared/types/tailwindTypes";
+import { TailwindColorObject } from "../../shared/types/tailwindTypes";
 import { ImageProps } from "../image/imageTypes";
-
-export type TailwindColorObject = {
-    color: TailwindColor,
-    intensity: TailwindIntensity
-}
 
 export type PlaceholderConfig = {
     cellSize: number;        

@@ -16,7 +16,8 @@ export { default as PlaceholderImage } from './components/placeholderImage/Place
 
 // types
 export type { EntranceAnimation, ExitAnimation, AnimationObject } from './shared/types/animationTypes';
-export type { TailwindColor, TailwindIntensity, ThemeOptions } from './shared/types/tailwindTypes';
+export type { TailwindColor, TailwindIntensity, ThemeOptions, TailwindColorObject } from './shared/types/tailwindTypes';
+export type { PlaceholderConfig, PlaceholderImageProps } from './components/placeholderImage/placeholderImageTypes'
 
 // utils
 export { tailwindToHex } from './shared/utils/tailwindToHex';
