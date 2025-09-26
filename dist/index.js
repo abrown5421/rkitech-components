@@ -2,6 +2,11 @@
 
 var jsxRuntime = require('react/jsx-runtime');
 var react = require('react');
+var trianglify = require('trianglify');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var trianglify__default = /*#__PURE__*/_interopDefault(trianglify);
 
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -27998,6 +28003,141 @@ var Loader2 = ({
   ] });
 };
 var Loader_default = Loader2;
+var PlaceholderImage = ({
+  src = "",
+  width,
+  height,
+  cellSize = 75,
+  variance = 0.5,
+  xColors = [],
+  yColors = []
+}) => {
+  const canvasRef = react.useRef(null);
+  const containerRef = react.useRef(null);
+  const clampedCellSize = Math.min(Math.max(cellSize, 10), 100);
+  const clampedVariance = Math.min(Math.max(variance, 0.1), 1);
+  const hexedXColors = xColors.map(
+    (c) => tailwindToHex(c.color, c.intensity)
+  );
+  const hexedYColors = yColors.map(
+    (c) => tailwindToHex(c.color, c.intensity)
+  );
+  const getActualDimensions = () => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      return {
+        width: rect.width || 300,
+        height: rect.height || 300
+      };
+    }
+    return {
+      width: typeof width === "number" ? width : width.includes("%") ? 300 : parseInt(width) || 300,
+      height: typeof height === "number" ? height : height.includes("%") ? 300 : parseInt(height) || 300
+    };
+  };
+  react.useEffect(() => {
+    if (!src && canvasRef.current && hexedXColors.length > 0 && hexedYColors.length > 0) {
+      const canvas = canvasRef.current;
+      const dimensions = getActualDimensions();
+      const pattern = trianglify__default.default({
+        width: dimensions.width,
+        height: dimensions.height,
+        cellSize: clampedCellSize,
+        variance: clampedVariance,
+        xColors: hexedXColors,
+        yColors: hexedYColors
+      });
+      canvas.width = dimensions.width;
+      canvas.height = dimensions.height;
+      pattern.toCanvas();
+      canvas.getContext("2d")?.drawImage(pattern.toCanvas(), 0, 0);
+    }
+  });
+  react.useEffect(() => {
+    if (!src && containerRef.current) {
+      const resizeObserver = new ResizeObserver(() => {
+        if (canvasRef.current && hexedXColors.length > 0 && hexedYColors.length > 0) {
+          const canvas = canvasRef.current;
+          const dimensions = getActualDimensions();
+          const pattern = trianglify__default.default({
+            width: dimensions.width,
+            height: dimensions.height,
+            cellSize: clampedCellSize,
+            variance: clampedVariance,
+            xColors: hexedXColors,
+            yColors: hexedYColors
+          });
+          canvas.width = dimensions.width;
+          canvas.height = dimensions.height;
+          pattern.toCanvas();
+          canvas.getContext("2d")?.drawImage(pattern.toCanvas(), 0, 0);
+        }
+      });
+      resizeObserver.observe(containerRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, [src, clampedCellSize, clampedVariance, hexedXColors, hexedYColors]);
+  const dimensionStyle = {
+    width: typeof width === "number" ? `${width}px` : width,
+    height: typeof height === "number" ? `${height}px` : height
+  };
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { ref: containerRef, style: dimensionStyle, children: src ? /* @__PURE__ */ jsxRuntime.jsx(
+    Image_default,
+    {
+      src,
+      width,
+      height,
+      style: dimensionStyle
+    }
+  ) : /* @__PURE__ */ jsxRuntime.jsx(
+    "canvas",
+    {
+      ref: canvasRef,
+      style: { width: "100%", height: "100%", display: "block" }
+    }
+  ) });
+};
+var PlaceholderImage_default = PlaceholderImage;
+
+// src/components/placeholderImage/placeholderGenerator.ts
+var colorPool = [
+  { color: "amber", intensity: 300 },
+  { color: "amber", intensity: 400 },
+  { color: "amber", intensity: 500 },
+  { color: "amber", intensity: 600 },
+  { color: "amber", intensity: 700 },
+  { color: "orange", intensity: 300 },
+  { color: "orange", intensity: 400 },
+  { color: "orange", intensity: 500 },
+  { color: "orange", intensity: 600 },
+  { color: "orange", intensity: 700 },
+  { color: "yellow", intensity: 400 },
+  { color: "yellow", intensity: 500 },
+  { color: "yellow", intensity: 600 },
+  { color: "yellow", intensity: 700 },
+  { color: "yellow", intensity: 800 },
+  { color: "red", intensity: 500 },
+  { color: "red", intensity: 600 },
+  { color: "red", intensity: 700 },
+  { color: "red", intensity: 800 },
+  { color: "red", intensity: 900 },
+  { color: "gray", intensity: 900 }
+];
+var getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+var getRandomFloat = (min, max) => Math.random() * (max - min) + min;
+var getRandomSubset = (arr, minSize = 2, maxSize = 5) => {
+  const size = getRandomInt(minSize, maxSize);
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, size);
+};
+var placeholderGenerator = () => {
+  return {
+    cellSize: getRandomInt(10, 100),
+    variance: parseFloat(getRandomFloat(0.1, 1).toFixed(2)),
+    xColors: getRandomSubset(colorPool),
+    yColors: getRandomSubset(colorPool)
+  };
+};
 /*! Bundled license information:
 
 lucide-react/dist/esm/shared/src/utils.js:
@@ -41138,10 +41278,12 @@ exports.Input = Input_default;
 exports.List = List_default;
 exports.ListItem = ListItem_default;
 exports.Loader = Loader_default;
+exports.PlaceholderImage = PlaceholderImage_default;
 exports.Radio = Radio_default;
 exports.Select = Select_default;
 exports.Switch = Switch_default;
 exports.Text = Text_default;
+exports.placeholderGenerator = placeholderGenerator;
 exports.tailwindToHex = tailwindToHex;
 //# sourceMappingURL=out.js.map
 //# sourceMappingURL=index.js.map

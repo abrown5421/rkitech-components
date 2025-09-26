@@ -12,10 +12,13 @@ export { default as Radio } from './components/radio/Radio';
 export { default as Checkbox } from './components/checkbox/Checkbox';
 export { default as Switch } from './components/switch/Switch';
 export { default as Loader } from './components/loader/Loader';
+export { default as PlaceholderImage } from './components/placeholderImage/PlaceholderImage';
 
 // types
 export type { EntranceAnimation, ExitAnimation, AnimationObject } from './shared/types/animationTypes';
-export type { TailwindColor, TailwindIntensity, ThemeOptions } from './shared/types/tailwindTypes';
+export type { TailwindColor, TailwindIntensity, ThemeOptions, TailwindColorObject } from './shared/types/tailwindTypes';
+export type { PlaceholderImageProps } from './components/placeholderImage/placeholderImageTypes'
 
 // utils
 export { tailwindToHex } from './shared/utils/tailwindToHex';
+export { placeholderGenerator } from './components/placeholderImage/placeholderGenerator';
