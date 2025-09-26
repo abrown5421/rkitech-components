@@ -1,38 +1,46 @@
-import { TailwindColor, TailwindColorObject, TailwindIntensity } from "../../shared/types/tailwindTypes";
-import { PlaceholderConfig } from "./placeholderImageTypes";
+import { TailwindColorObject } from "../../shared/types/tailwindTypes";
 
-const COLORS: TailwindColor[] = [
-  "red", "orange", "amber", "yellow", "lime", "green", "emerald",
-  "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia",
-  "pink", "rose"
+const colorPool: TailwindColorObject[] = [
+  { color: 'amber', intensity: 300 },
+  { color: 'amber', intensity: 400 },
+  { color: 'amber', intensity: 500 },
+  { color: 'amber', intensity: 600 },
+  { color: 'amber', intensity: 700 },
+  { color: 'orange', intensity: 300 },
+  { color: 'orange', intensity: 400 },
+  { color: 'orange', intensity: 500 },
+  { color: 'orange', intensity: 600 },
+  { color: 'orange', intensity: 700 },
+  { color: 'yellow', intensity: 400 },
+  { color: 'yellow', intensity: 500 },
+  { color: 'yellow', intensity: 600 },
+  { color: 'yellow', intensity: 700 },
+  { color: 'yellow', intensity: 800 },
+  { color: 'red', intensity: 500 },
+  { color: 'red', intensity: 600 },
+  { color: 'red', intensity: 700 },
+  { color: 'red', intensity: 800 },
+  { color: 'red', intensity: 900 },
+  { color: 'gray', intensity: 900 },
 ];
 
-const INTENSITIES: TailwindIntensity[] = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
-
-const randomInt = (min: number, max: number): number =>
+const getRandomInt = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
-const randomFloat = (min: number, max: number, decimals = 2): number => {
-  const str = (Math.random() * (max - min) + min).toFixed(decimals);
-  return parseFloat(str);
+const getRandomFloat = (min: number, max: number): number =>
+  Math.random() * (max - min) + min;
+
+const getRandomSubset = (arr: TailwindColorObject[], minSize = 2, maxSize = 5): TailwindColorObject[] => {
+  const size = getRandomInt(minSize, maxSize);
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, size);
 };
 
-const randomColorObject = (): TailwindColorObject => ({
-  color: COLORS[randomInt(0, COLORS.length - 1)],
-  intensity: INTENSITIES[randomInt(0, INTENSITIES.length - 1)],
-});
-
-export const placeholderGenerator = (): PlaceholderConfig => {
-  const numXColors = randomInt(2, 5); 
-  const numYColors = randomInt(2, 5);
-
-  const xColors: TailwindColorObject[] = Array.from({ length: numXColors }, randomColorObject);
-  const yColors: TailwindColorObject[] = Array.from({ length: numYColors }, randomColorObject);
-
+export const placeholderGenerator = () => {
   return {
-    cellSize: randomInt(10, 100),
-    variance: randomFloat(0.1, 1, 2),
-    xColors,
-    yColors,
+    cellSize: getRandomInt(10, 100),
+    variance: parseFloat(getRandomFloat(0.1, 1).toFixed(2)),
+    xColors: getRandomSubset(colorPool),
+    yColors: getRandomSubset(colorPool),
   };
 };

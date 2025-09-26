@@ -1,66 +1,118 @@
-import React from "react";
-import { Trianglify } from "react-trianglify";
-import { PlaceholderImageProps } from "./placeholderImageTypes";
+import React, { useEffect, useRef } from "react";
+import trianglify from "trianglify";
+import type { PlaceholderImageProps } from "./placeholderImageTypes";
 import { tailwindToHex } from "../../shared/utils/tailwindToHex";
-
-const normalizeSize = (value: number | string): string => {
-  return typeof value === "number" ? `${value}px` : value;
-};
-
-const clampCellSize = (value: number): number =>
-  Math.min(Math.max(value, 10), 100);
-
-const clampVariance = (value: number): number =>
-  Math.min(Math.max(value, 0.1), 1);
+import Image from "../image/Image";
 
 const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
+  src = "",
   width,
   height,
-  placeholder,
-  image,
+  cellSize = 75,
+  variance = 0.5,
+  xColors = [],
+  yColors = [],
 }) => {
-  if (image?.src) {
-    return (
-      <img
-        src={image.src}
-        alt={image.alt || "Placeholder image"}
-        width={undefined}
-        height={undefined}
-        onClick={image.onClick}
-        className={image.tailwindClasses}
-        style={{
-          width: normalizeSize(image.width ?? width),
-          height: normalizeSize(image.height ?? height),
-          ...image.style,
-        }}
-      />
-    );
-  }
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const { cellSize, variance, xColors, yColors } = placeholder;
+  const clampedCellSize = Math.min(Math.max(cellSize, 10), 100);
+  const clampedVariance = Math.min(Math.max(variance, 0.1), 1);
 
-  const xTailwindToHex = xColors.map((c) =>
+  const hexedXColors: string[] = xColors.map(c => 
     tailwindToHex(c.color, c.intensity)
   );
-  const yTailwindToHex = yColors.map((c) =>
+  
+  const hexedYColors: string[] = yColors.map(c => 
     tailwindToHex(c.color, c.intensity)
   );
+
+  const getActualDimensions = (): { width: number; height: number } => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      return {
+        width: rect.width || 300,
+        height: rect.height || 300
+      };
+    }
+    
+    return {
+      width: typeof width === 'number' ? width : (width.includes('%') ? 300 : parseInt(width) || 300),
+      height: typeof height === 'number' ? height : (height.includes('%') ? 300 : parseInt(height) || 300)
+    };
+  };
+
+  useEffect(() => {
+    if (!src && canvasRef.current && hexedXColors.length > 0 && hexedYColors.length > 0) {
+      const canvas = canvasRef.current;
+      const dimensions = getActualDimensions();
+      
+      const pattern = trianglify({
+        width: dimensions.width,
+        height: dimensions.height,
+        cellSize: clampedCellSize,
+        variance: clampedVariance,
+        xColors: hexedXColors,
+        yColors: hexedYColors,
+      });
+      
+      canvas.width = dimensions.width;
+      canvas.height = dimensions.height;
+          pattern.toCanvas(); 
+          canvas.getContext("2d")?.drawImage(pattern.toCanvas(), 0, 0);
+    }
+  });
+
+  useEffect(() => {
+    if (!src && containerRef.current) {
+      const resizeObserver = new ResizeObserver(() => {
+        if (canvasRef.current && hexedXColors.length > 0 && hexedYColors.length > 0) {
+          const canvas = canvasRef.current;
+          const dimensions = getActualDimensions();
+          
+          const pattern = trianglify({
+            width: dimensions.width,
+            height: dimensions.height,
+            cellSize: clampedCellSize,
+            variance: clampedVariance,
+            xColors: hexedXColors,
+            yColors: hexedYColors,
+          });
+          
+          canvas.width = dimensions.width;
+          canvas.height = dimensions.height;
+          pattern.toCanvas(); 
+          canvas.getContext("2d")?.drawImage(pattern.toCanvas(), 0, 0);
+        }
+      });
+
+      resizeObserver.observe(containerRef.current);
+      
+      return () => resizeObserver.disconnect();
+    }
+  }, [src, clampedCellSize, clampedVariance, hexedXColors, hexedYColors]);
+
+  const dimensionStyle = {
+    width: typeof width === 'number' ? `${width}px` : width,
+    height: typeof height === 'number' ? `${height}px` : height,
+  };
 
   return (
-    <Trianglify
-      width={typeof width === "number" ? width : parseInt(width, 10)}
-      height={typeof height === "number" ? height : parseInt(height, 10)}
-      cellSize={clampCellSize(cellSize)}
-      variance={clampVariance(variance)}
-      xColors={xTailwindToHex}
-      yColors={yTailwindToHex}
-      className={image?.tailwindClasses}
-      style={{
-        width: normalizeSize(image?.width ?? width),
-        height: normalizeSize(image?.height ?? height),
-        ...image?.style,
-      }}
-    />
+    <div ref={containerRef} style={dimensionStyle}>
+      {src ? (
+        <Image 
+          src={src} 
+          width={width} 
+          height={height}
+          style={dimensionStyle}
+        />
+      ) : (
+        <canvas
+          ref={canvasRef}
+          style={{ width: '100%', height: '100%', display: 'block' }}
+        />
+      )}
+    </div>
   );
 };
 
