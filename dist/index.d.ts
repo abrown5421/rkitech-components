@@ -196,7 +196,7 @@ declare const PlaceholderImage: React$1.FC<PlaceholderImageProps>;
 
 declare function tailwindToHex(colorName: string, intensity: number): string;
 
-declare const placeholderGenerator: () => {
+declare const placeholderGenerator: (colorPool: TailwindColorObject[]) => {
     cellSize: number;
     variance: number;
     xColors: TailwindColorObject[];

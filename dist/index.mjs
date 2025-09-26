@@ -28094,29 +28094,6 @@ var PlaceholderImage = ({
 var PlaceholderImage_default = PlaceholderImage;
 
 // src/components/placeholderImage/placeholderGenerator.ts
-var colorPool = [
-  { color: "amber", intensity: 300 },
-  { color: "amber", intensity: 400 },
-  { color: "amber", intensity: 500 },
-  { color: "amber", intensity: 600 },
-  { color: "amber", intensity: 700 },
-  { color: "orange", intensity: 300 },
-  { color: "orange", intensity: 400 },
-  { color: "orange", intensity: 500 },
-  { color: "orange", intensity: 600 },
-  { color: "orange", intensity: 700 },
-  { color: "yellow", intensity: 400 },
-  { color: "yellow", intensity: 500 },
-  { color: "yellow", intensity: 600 },
-  { color: "yellow", intensity: 700 },
-  { color: "yellow", intensity: 800 },
-  { color: "red", intensity: 500 },
-  { color: "red", intensity: 600 },
-  { color: "red", intensity: 700 },
-  { color: "red", intensity: 800 },
-  { color: "red", intensity: 900 },
-  { color: "gray", intensity: 900 }
-];
 var getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 var getRandomFloat = (min, max) => Math.random() * (max - min) + min;
 var getRandomSubset = (arr, minSize = 2, maxSize = 5) => {
@@ -28124,7 +28101,7 @@ var getRandomSubset = (arr, minSize = 2, maxSize = 5) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, size);
 };
-var placeholderGenerator = () => {
+var placeholderGenerator = (colorPool) => {
   return {
     cellSize: getRandomInt(10, 100),
     variance: parseFloat(getRandomFloat(0.1, 1).toFixed(2)),
