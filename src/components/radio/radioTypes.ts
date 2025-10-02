@@ -4,6 +4,7 @@ import { AnimationObject } from "../../shared/types/animationTypes";
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
   animationObject?: AnimationObject;
   tailwindClasses?: string;
+  style?: React.CSSProperties;
   label?: string;
   error?: boolean;
   helperText?: string;

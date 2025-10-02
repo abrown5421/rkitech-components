@@ -11,4 +11,5 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
   color?: string;
   intensity?: number;
   size?: 'sm' | 'md' | 'lg';
+  style?: React.CSSProperties;
 }

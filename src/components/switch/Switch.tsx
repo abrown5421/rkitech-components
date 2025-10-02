@@ -15,6 +15,7 @@ const Switch: React.FC<SwitchProps> = ({
   color = "amber",
   intensity = 500,
   size = "md",
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
@@ -146,7 +147,7 @@ const Switch: React.FC<SwitchProps> = ({
   const helperTextClasses = `text-sm mt-1 ml-12 ${error ? "text-red-500" : "text-gray-500"}`;
 
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} className="w-full" style={{...style}}>
       <div className={containerClasses}>
         <div className={trackClasses} onClick={handleLabelClick}>
           <input

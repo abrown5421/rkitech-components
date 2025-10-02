@@ -16,6 +16,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   color = "amber",
   intensity = 500,
   size = "md",
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
@@ -145,7 +146,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   );
 
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} className="w-full" style={{...style,}}>
       <div className={containerClasses}>
         <div className={checkboxWrapperClasses} onClick={handleLabelClick}>
           <input

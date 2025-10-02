@@ -6,7 +6,7 @@ const Loader: React.FC<LoaderProps> = ({
     show,
     color = 'blue', 
     intensity = 500,
-    type,
+    loaderType,
     variant,
     tailwindClasses = '',
     style = {}
@@ -21,7 +21,7 @@ const Loader: React.FC<LoaderProps> = ({
       '--loader-color': hexColor,
     } as React.CSSProperties;
 
-    const key = `${type.toLowerCase()}-${variant}`;
+    const key = `${loaderType.toLowerCase()}-${variant}`;
     
     switch (key) {
       // DOT ANIMATIONS
@@ -312,7 +312,7 @@ const Loader: React.FC<LoaderProps> = ({
   };
 
   const renderSpecialElements = () => {
-    const key = `${type.toLowerCase()}-${variant}`;
+    const key = `${loaderType.toLowerCase()}-${variant}`;
     
     // Special handling for dots-3 pseudo-elements
     if (key === 'dots-3') {

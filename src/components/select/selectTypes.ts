@@ -4,6 +4,7 @@ import { AnimationObject } from "../../shared/types/animationTypes";
 export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'className'> {
   animationObject?: AnimationObject;
   tailwindClasses?: string;
+  style?: React.CSSProperties;
   label?: string;
   error?: boolean;
   helperText?: string;

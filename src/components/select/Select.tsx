@@ -18,6 +18,7 @@ const Select: React.FC<SelectProps> = ({
   intensity = 500,
   placeholder,
   children,
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
@@ -128,7 +129,7 @@ const Select: React.FC<SelectProps> = ({
   );
 
   return (
-    <div ref={containerRef} className={containerClasses}>
+    <div ref={containerRef} className={containerClasses} style={{...style}}>
       <div className={selectWrapperClasses}>
         {startAdornment && (
           <div className="absolute left-2 flex items-center text-gray-500 pointer-events-none">
