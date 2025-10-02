@@ -6,8 +6,8 @@ const Loader: React.FC<LoaderProps> = ({
     show,
     color = 'blue', 
     intensity = 500,
-    loaderType,
-    variant,
+    loaderType = 'Spinner', 
+    variant = 1,
     tailwindClasses = '',
     style = {}
 }) => {
