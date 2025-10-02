@@ -8,4 +8,6 @@ export interface PlaceholderImageProps {
     variance: number,
     xColors: TailwindColorObject[],
     yColors: TailwindColorObject[],
+    tailwindClasses?: string;
+    style?: React.CSSProperties;
 }

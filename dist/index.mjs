@@ -26869,6 +26869,7 @@ var Input = ({
   disabled = false,
   color = "amber",
   intensity = 500,
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
@@ -26937,7 +26938,7 @@ var Input = ({
     ${focused || hasValue ? `text-xs -top-2.5 ${disabled ? "text-gray-400" : error ? "text-red-500" : focused ? focusLabelColor : "text-gray-950"}` : `text-base top-3 ${disabled ? "text-gray-400" : "text-gray-500"}`}
   `.trim();
   const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
-  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: containerClasses, children: [
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: containerClasses, style: { ...style }, children: [
     /* @__PURE__ */ jsxs("div", { className: inputWrapperClasses, children: [
       startAdornment && /* @__PURE__ */ jsx("div", { className: "absolute left-2 flex items-center text-gray-500", children: startAdornment }),
       multiline ? /* @__PURE__ */ jsx(
@@ -26995,6 +26996,7 @@ var Select = ({
   intensity = 500,
   placeholder,
   children,
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
@@ -27069,7 +27071,7 @@ var Select = ({
       children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M19 9l-7 7-7-7" })
     }
   );
-  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: containerClasses, children: [
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: containerClasses, style: { ...style }, children: [
     /* @__PURE__ */ jsxs("div", { className: selectWrapperClasses, children: [
       startAdornment && /* @__PURE__ */ jsx("div", { className: "absolute left-2 flex items-center text-gray-500 pointer-events-none", children: startAdornment }),
       /* @__PURE__ */ jsxs(
@@ -27116,6 +27118,7 @@ var Radio2 = ({
   color = "amber",
   intensity = 500,
   size = "md",
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
@@ -27191,7 +27194,7 @@ var Radio2 = ({
       ${size === "sm" ? "w-1.5 h-1.5" : size === "md" ? "w-2 h-2" : "w-2.5 h-2.5"} 
       rounded-full bg-white transition-all duration-200
     ` });
-  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", children: [
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", style: { ...style }, children: [
     /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
       /* @__PURE__ */ jsxs("div", { className: radioWrapperClasses, onClick: handleLabelClick, children: [
         /* @__PURE__ */ jsx(
@@ -27238,6 +27241,7 @@ var Checkbox = ({
   color = "amber",
   intensity = 500,
   size = "md",
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
@@ -27324,7 +27328,7 @@ var Checkbox = ({
       children: indeterminate ? /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 3, d: "M20 12H4" }) : /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 3, d: "M5 13l4 4L19 7" })
     }
   );
-  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", children: [
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", style: { ...style }, children: [
     /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
       /* @__PURE__ */ jsxs("div", { className: checkboxWrapperClasses, onClick: handleLabelClick, children: [
         /* @__PURE__ */ jsx(
@@ -27370,6 +27374,7 @@ var Switch = ({
   color = "amber",
   intensity = 500,
   size = "md",
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
@@ -27463,7 +27468,7 @@ var Switch = ({
     ${!disabled ? "cursor-pointer" : ""}
   `.trim();
   const helperTextClasses = `text-sm mt-1 ml-12 ${error ? "text-red-500" : "text-gray-500"}`;
-  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", children: [
+  return /* @__PURE__ */ jsxs("div", { ref: containerRef, className: "w-full", style: { ...style }, children: [
     /* @__PURE__ */ jsxs("div", { className: containerClasses, children: [
       /* @__PURE__ */ jsxs("div", { className: trackClasses, onClick: handleLabelClick, children: [
         /* @__PURE__ */ jsx(
@@ -27499,7 +27504,7 @@ var Loader2 = ({
   show,
   color = "blue",
   intensity = 500,
-  type,
+  loaderType,
   variant,
   tailwindClasses = "",
   style = {}
@@ -27512,7 +27517,7 @@ var Loader2 = ({
       ...style,
       "--loader-color": hexColor
     };
-    const key = `${type.toLowerCase()}-${variant}`;
+    const key = `${loaderType.toLowerCase()}-${variant}`;
     switch (key) {
       case "dots-1":
         return {
@@ -27777,7 +27782,7 @@ var Loader2 = ({
     }
   };
   const renderSpecialElements = () => {
-    const key = `${type.toLowerCase()}-${variant}`;
+    const key = `${loaderType.toLowerCase()}-${variant}`;
     if (key === "dots-3") {
       return /* @__PURE__ */ jsxs(Fragment, { children: [
         /* @__PURE__ */ jsx(
@@ -28004,7 +28009,8 @@ var PlaceholderImage = ({
   cellSize = 75,
   variance = 0.5,
   xColors = [],
-  yColors = []
+  yColors = [],
+  style
 }) => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
@@ -28075,7 +28081,7 @@ var PlaceholderImage = ({
     width: typeof width === "number" ? `${width}px` : width,
     height: typeof height === "number" ? `${height}px` : height
   };
-  return /* @__PURE__ */ jsx("div", { ref: containerRef, style: dimensionStyle, children: src ? /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsx("div", { ref: containerRef, style: { ...dimensionStyle, ...style }, children: src ? /* @__PURE__ */ jsx(
     Image_default,
     {
       src,

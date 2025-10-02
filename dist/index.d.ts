@@ -110,6 +110,7 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'classN
     rows?: number | 'fill';
     color?: string;
     intensity?: number;
+    style?: React.CSSProperties;
 }
 
 declare const Input: React$1.FC<InputProps>;
@@ -117,6 +118,7 @@ declare const Input: React$1.FC<InputProps>;
 interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'className'> {
     animationObject?: AnimationObject;
     tailwindClasses?: string;
+    style?: React.CSSProperties;
     label?: string;
     error?: boolean;
     helperText?: string;
@@ -133,6 +135,7 @@ declare const Select: React$1.FC<SelectProps>;
 interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
     animationObject?: AnimationObject;
     tailwindClasses?: string;
+    style?: React.CSSProperties;
     label?: string;
     error?: boolean;
     helperText?: string;
@@ -153,6 +156,7 @@ interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'cla
     color?: string;
     intensity?: number;
     size?: 'sm' | 'md' | 'lg';
+    style?: React.CSSProperties;
 }
 
 declare const Checkbox: React$1.FC<CheckboxProps>;
@@ -160,6 +164,7 @@ declare const Checkbox: React$1.FC<CheckboxProps>;
 interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'type' | 'size'> {
     animationObject?: AnimationObject;
     tailwindClasses?: string;
+    style?: React.CSSProperties;
     label?: string;
     error?: boolean;
     helperText?: string;
@@ -174,7 +179,7 @@ interface LoaderProps {
     show: boolean;
     color?: TailwindColor;
     intensity?: TailwindIntensity;
-    type: 'Dots' | 'Bars' | 'Spinner' | 'Progress';
+    loaderType: 'Dots' | 'Bars' | 'Spinner' | 'Progress';
     variant: number;
     tailwindClasses?: string;
     style?: React.CSSProperties;
@@ -190,6 +195,8 @@ interface PlaceholderImageProps {
     variance: number;
     xColors: TailwindColorObject[];
     yColors: TailwindColorObject[];
+    tailwindClasses?: string;
+    style?: React.CSSProperties;
 }
 
 declare const PlaceholderImage: React$1.FC<PlaceholderImageProps>;

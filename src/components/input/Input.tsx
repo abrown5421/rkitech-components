@@ -18,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   disabled = false,
   color = "amber",
   intensity = 500,
+  style,
   ...rest
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
@@ -120,7 +121,7 @@ const Input: React.FC<InputProps> = ({
   const helperTextClasses = `text-sm mt-1 ${error ? "text-red-500" : "text-gray-500"}`;
 
   return (
-    <div ref={containerRef} className={containerClasses}>
+    <div ref={containerRef} className={containerClasses} style={{...style}}>
       <div className={inputWrapperClasses}>
         {startAdornment && (
           <div className="absolute left-2 flex items-center text-gray-500">

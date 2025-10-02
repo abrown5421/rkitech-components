@@ -12,6 +12,7 @@ const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
   variance = 0.5,
   xColors = [],
   yColors = [],
+  style
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,7 +99,7 @@ const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
   };
 
   return (
-    <div ref={containerRef} style={dimensionStyle}>
+    <div ref={containerRef} style={{ ...dimensionStyle, ...style }}>
       {src ? (
         <Image 
           src={src} 

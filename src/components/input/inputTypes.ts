@@ -13,4 +13,5 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   rows?: number | 'fill';
   color?: string;
   intensity?: number;
+  style?: React.CSSProperties;
 }
